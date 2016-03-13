@@ -48,7 +48,7 @@ a:focus {
   z-index: 99999;
 }
 #main-slider {
-  background-image: url(../images/slider-bg.jpg);
+  background-image: url(../images/ownProj/startposition_sprint2.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%;
@@ -631,4 +631,27 @@ textarea#message {
     opacity: 1;
     -o-transform: scale(1);
   }
+}
+
+.boxed {
+  padding: 10px 15px;
+  background-color: rgba(0,0,0,0.7);
+  display: inline-block;
+}
+
+.events-objects{
+  font-size: 24px;
+  height: 14rem;
+  width: 33rem;
+  line-height: 68px;
+  color: #fff;
+  margin-right: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.background-event-weitsprung{
+  background-image: url(../images/ownProj/events/Weitsprung.jpg);
 }
