@@ -22,6 +22,7 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="controller.js"></script>
 
 </head>
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
@@ -76,29 +77,75 @@
                 <div class="col-sm-6">
                     <div class="center">
                         <i class="events-objects background-event-weitsprung"></i>
-                        <h4>Weitsprung</h4>
-                        <p style="margin-bottom: 1rem">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
+                        <button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalJumping">Weitsprung</button>
                     </div>
-                </div><!--/.col-md-4-->
+                </div>
+
+                <!-- Modal Jumping -->
+                <div class="modal fade" id="modalJumping" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Ergebnisse Weitsprung</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th>Bester Sprung</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>10c</td>
+                                    <td>50 Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>4,5 Meter DAAAMN!</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Dein bester Sprung: <b>1,5 Meter</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-sm-6">
                     <div class="center">
                         <i class="events-objects background-event-schwimmen"></i>
-                        <h4>Schwimmen</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
+                        <button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalSwimming">Schwimmen</button>
                     </div>
-                </div><!--/.col-md-4-->
+                </div>
                 <div class="col-sm-6" style="margin-top: 5rem;">
                     <div class="center">
-                        <i class="events-objects"></i>
-                        <h4>Javascript development</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
+                        <i class="events-objects background-event-weitwurf"></i>
+                        <button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalThrowing">Weitwurf</button>
                     </div>
-                </div><!--/.col-md-4-->
+                </div>
                 <div class="col-sm-6" style="margin-top: 5rem;">
                     <div class="center">
-                        <i class="events-objects"></i>
-                        <h4>Responsive web design</h4>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
+                        <i class="events-objects background-event-sprint"></i>
+                        <button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalRunning">Sprint</button>
                     </div>
                 </div><!--/.col-md-4-->
             </div><!--/.row-->
