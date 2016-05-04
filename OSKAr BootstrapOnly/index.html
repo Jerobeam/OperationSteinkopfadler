@@ -41,7 +41,8 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#main-slider"><i class="fa fa-home"></i></a></li>
-                    <li><a href="#events">Events</a></li>
+                    <li><a href="#competitions">Wettkämpfe</a></li>
+                    <li><a href="#tournaments">Turniere</a></li>
                     <li><a href="#gallerie">Gallerie</a></li>
                     <li><a href="#lageplan">Lageplan</a></li>
                     <li><a href="#kontakt">Kontakt</a></li>
@@ -50,7 +51,7 @@
             </div>
         </div>
     </div>
-</header><!--/#header-->
+</header>
 
 <section id="main-slider" class="carousel">
     <div class="carousel-inner">
@@ -61,19 +62,21 @@
                     <p class="lead boxed">26. Sportfest des <b>Lessinggymnasium Lampertheim</b></p>
                 </div>
             </div>
-        </div><!--/.item-->
-    </div><!--/.carousel-inner-->
+        </div>
+    </div>
     <!--<a class="prev" href="#main-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>-->
     <!--<a class="next" href="#main-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>-->
 </section><!--/#main-slider-->
 
-<section id="events">
+<section id="competitions">
     <div class="container">
         <div class="box">
             <div class="center gap">
-                <h2>Events</h2>
-            </div><!--/.center-->
+                <h2>Wettkämpfe</h2>
+            </div>
             <div class="row">
+
+                <!--Item Jumping-->
                 <div class="col-sm-6">
                     <div class="center">
                         <i class="events-objects background-event-weitsprung"></i>
@@ -88,7 +91,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Ergebnisse Weitsprung</h4>
+                                <h4 class="modal-title">Bestenliste Weitsprung</h4>
                             </div>
                             <table class="table">
                                 <thead>
@@ -96,13 +99,13 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Klasse</th>
-                                    <th>Bester Sprung</th>
+                                    <th>Sprung</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>Rouven Fucking Adam Morato</td>
                                     <td>10c</td>
                                     <td>50 Meter</td>
                                 </tr>
@@ -130,141 +133,229 @@
                     </div>
                 </div>
 
+                <!--Item Swimming-->
                 <div class="col-sm-6">
                     <div class="center">
                         <i class="events-objects background-event-schwimmen"></i>
                         <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalSwimming">Schwimmen</button></h4>
                     </div>
                 </div>
+
+                <!-- Modal Swimming -->
+                <div class="modal fade" id="modalSwimming" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste 100m Schwimmen</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th>Zeit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morato</td>
+                                    <td>10c</td>
+                                    <td>1 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>2 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Min. 50 Sek.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Deine Zeit: <b>3 Min. 3 Sek.</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Throwing-->
                 <div class="col-sm-6" style="margin-top: 5rem;">
                     <div class="center">
                         <i class="events-objects background-event-weitwurf"></i>
                         <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalThrowing">Weitwurf</button></h4>
                     </div>
                 </div>
+
+                <!-- Modal Throwing -->
+                <div class="modal fade" id="modalThrowing" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste Weitwurf</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th Wurf</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>10c</td>
+                                    <td>Unendlich Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>80 Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Dein bester Wurf: <b>Trölf Meter</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Running-->
                 <div class="col-sm-6" style="margin-top: 5rem;">
                     <div class="center">
                         <i class="events-objects background-event-sprint"></i>
                         <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalRunning">Sprint</button></h4>
                     </div>
-                </div><!--/.col-md-4-->
-            </div><!--/.row-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#services-->
+                </div>
+
+                <!-- Modal Running -->
+                <div class="modal fade" id="modalRunning" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste 100m Sprint</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th Zeit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>10c</td>
+                                    <td>0 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>10 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Deine beste Zeit: <b>5 Sek.</b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tournaments">
+    <div class="container">
+        <div class="box">
+            <div class="center gap">
+                <h2>Turniere</h2>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="gallerie">
     <div class="container">
         <div class="box">
-            <div class="center gap">
-                <h2>Portfolio</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac<br>turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-            </div><!--/.center-->
-            <ul class="portfolio-filter">
-                <li><a class="btn btn-primary active" href="#" data-filter="*">All</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".html">HTML</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a></li>
-            </ul><!--/#portfolio-filter-->
-            <ul class="portfolio-items col-4">
-                <li class="portfolio-item apps">
+            <div class="center">
+                <h2>Gallerie</h2>
+            </div>
+            <ul class="gallerie-filter">
+                <li><a class="btn btn-primary active" href="#" data-filter="*">Alle</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".jumping">Weitsprung</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".swimming">Schwimmen</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".throwing">Weitwurf</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".running">Sprint</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".football">Fußball</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".basketball">Basketball</a></li>
+            </ul>
+            <ul class="gallerie-items col-4">
+                <li class="gallerie-item jumping">
                     <div class="item-inner">
-                        <div class="portfolio-image">
+                        <div class="gallerie-image">
                             <img src="images/portfolio/thumb/item1.jpg" alt="">
                             <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item1.jpg"><i class="fa fa-eye"></i></a>
+                                <a class="preview btn btn-danger" title="Titel Mitel" href="images/portfolio/full/item1.jpg"><i class="fa fa-eye"></i></a>
                             </div>
                         </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
+                        <h5>Bildbeschreibung</h5>
                     </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla bootstrap">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item2.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item2.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item bootstrap wordpress">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item3.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item3.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla wordpress apps">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item4.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item4.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item5.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item wordpress html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item6.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item joomla html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item5.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
-                <li class="portfolio-item wordpress html">
-                    <div class="item-inner">
-                        <div class="portfolio-image">
-                            <img src="images/portfolio/thumb/item6.jpg" alt="">
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="fa fa-eye"></i></a>
-                            </div>
-                        </div>
-                        <h5>Lorem ipsum dolor sit amet</h5>
-                    </div>
-                </li><!--/.portfolio-item-->
+                </li>
             </ul>
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#portfolio-->
+        </div>
+    </div>
+</section>
 
 <section id="lageplan">
     <div class="container">
         <div class="box">
             <div class="center">
-                <h2>See our Pricings</h2>
+                <h2>Lageplan</h2>
                 <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
             </div><!--/.center-->
             <div class="big-gap"></div>
@@ -308,13 +399,13 @@
             </div>
         </div>
     </div>
-</section><!--/#pricing-->
+</section>
 
 <section id="kontakt">
     <div class="container">
         <div class="box">
             <div class="center">
-                <h2>Meet the Team</h2>
+                <h2>Kontakt</h2>
                 <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis egestas.</p>
             </div>
             <div class="gap"></div>
@@ -349,10 +440,10 @@
                 <a class="right-arrow" href="#team-scroller" data-slide="next">
                     <i class="icon-angle-right icon-4x"></i>
                 </a>
-            </div><!--/.carousel-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#about-us-->
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="login">
     <div class="container">
@@ -361,7 +452,7 @@
                 <div class="col-sm-6">
                      <iframe  height="300" scrolling="no" src="http://localhost/php/login.php"></iframe> 
 					 <iframe scrolling="no" src="http://localhost/php/register.php"></iframe> 
-                </div><!--/.col-sm-6-->
+                </div>
                 <div class="col-sm-6">
                     <h1>Our Address</h1>
                     <div class="row">
@@ -382,41 +473,13 @@
                             </address>
                         </div>
                     </div>
-                    <h1>Connect with us</h1>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="social">
-                                <li><a href="#"><i class="icon-facebook icon-social"></i> Facebook</a></li>
-                                <li><a href="#"><i class="icon-google-plus icon-social"></i> Google Plus</a></li>
-                                <li><a href="#"><i class="icon-pinterest icon-social"></i> Pinterest</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="social">
-                                <li><a href="#"><i class="icon-linkedin icon-social"></i> Linkedin</a></li>
-                                <li><a href="#"><i class="icon-twitter icon-social"></i> Twitter</a></li>
-                                <li><a href="#"><i class="icon-youtube icon-social"></i> Youtube</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!--/.col-sm-6-->
-            </div><!--/.row-->
-        </div><!--/.box-->
-    </div><!--/.container-->
-</section><!--/#contact-->
-
-<footer id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
-            </div>
-            <div class="col-sm-6">
-                <img class="pull-right" src="images/shapebootstrap.png" alt="ShapeBootstrap" title="ShapeBootstrap">
+                </div>
             </div>
         </div>
     </div>
-</footer><!--/#footer-->
+</section>
+
+<footer id="footer"></footer>
 
 </body>
 </html>
