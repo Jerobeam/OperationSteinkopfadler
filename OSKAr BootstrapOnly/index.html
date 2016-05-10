@@ -24,6 +24,117 @@
     <script src="js/main.js"></script>
     <script src="controller.js"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU&signed_in=true&libraries=places" async defer></script>
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 49.599314, lng: 8.4545},
+                zoom: 16
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            var schoolLocation = null;
+            var startLocation = null;
+
+            service.getDetails({
+                placeId: 'ChIJlf_d5AjTl0cRbmXEXCuGo1I'
+            }, function(place, status) {
+                schoolLocation = place.geometry.location;
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: schoolLocation
+                    });
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(place.name);
+                        infowindow.open(map, this);
+                    });
+                }
+            });
+
+            var input = /** @type {!HTMLInputElement} */(
+                    document.getElementById('pac-input'));
+
+            var types = document.getElementById('type-selector');
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                startLocation = place.geometry.location;
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+                marker.setIcon(/** @type {google.maps.Icon} */({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+
+                //display Route
+                var directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                });
+                // Set destination, origin and travel mode.
+                var request = {
+                    destination: schoolLocation,
+                    origin: startLocation,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+
+                // Pass the directions request to the directions service.
+                var directionsService = new google.maps.DirectionsService();
+                directionsService.route(request, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        // Display the route on the map.
+                        directionsDisplay.setDirections(response);
+                    }
+                });
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
 </head>
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
 <header id="header" role="banner">
@@ -43,8 +154,8 @@
                     <li class="active"><a href="#main-slider"><i class="fa fa-home"></i></a></li>
                     <li><a href="#competitions">Wettkämpfe</a></li>
                     <li><a href="#tournaments">Turniere</a></li>
-                    <li><a href="#gallerie">Gallerie</a></li>
-                    <li><a href="#lageplan">Lageplan</a></li>
+                    <li><a href="#gallery">Gallerie</a></li>
+                    <li><a href="#directions">Anfahrt</a></li>
                     <li><a href="#kontakt">Kontakt</a></li>
                     <li><a href="#login">Log In</a></li>
                 </ul>
@@ -64,9 +175,7 @@
             </div>
         </div>
     </div>
-    <!--<a class="prev" href="#main-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>-->
-    <!--<a class="next" href="#main-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>-->
-</section><!--/#main-slider-->
+</section>
 
 <section id="competitions">
     <div class="container">
@@ -319,31 +428,106 @@
     </div>
 </section>
 
-<section id="gallerie">
+<section id="gallery">
     <div class="container">
         <div class="box">
-            <div class="center">
-                <h2>Gallerie</h2>
-            </div>
-            <ul class="gallerie-filter">
-                <li><a class="btn btn-primary active" href="#" data-filter="*">Alle</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".jumping">Weitsprung</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".swimming">Schwimmen</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".throwing">Weitwurf</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".running">Sprint</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".football">Fußball</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".basketball">Basketball</a></li>
+            <div class="center gap">
+                <h2>Portfolio</h2>
+                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac<br>turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
+            </div><!--/.center-->
+            <ul class="portfolio-filter">
+                <li><a class="btn btn-primary active" href="#" data-filter="*">All</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".html">HTML</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a></li>
             </ul>
-            <ul class="gallerie-items col-4">
-                <li class="gallerie-item jumping">
+            <ul class="portfolio-items col-4">
+                <li class="portfolio-item apps">
                     <div class="item-inner">
-                        <div class="gallerie-image">
+                        <div class="portfolio-image">
                             <img src="images/portfolio/thumb/item1.jpg" alt="">
                             <div class="overlay">
-                                <a class="preview btn btn-danger" title="Titel Mitel" href="images/portfolio/full/item1.jpg"><i class="fa fa-eye"></i></a>
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item1.jpg"><i class="icon-eye-open"></i></a>
                             </div>
                         </div>
-                        <h5>Bildbeschreibung</h5>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item joomla bootstrap">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item2.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item2.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item bootstrap wordpress">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item3.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item3.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item joomla wordpress apps">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item4.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item4.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item joomla html">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item5.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item wordpress html">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item6.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item joomla html">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item5.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
+                    </div>
+                </li>
+                <li class="portfolio-item wordpress html">
+                    <div class="item-inner">
+                        <div class="portfolio-image">
+                            <img src="images/portfolio/thumb/item6.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>
+                            </div>
+                        </div>
+                        <h5>Lorem ipsum dolor sit amet</h5>
                     </div>
                 </li>
             </ul>
@@ -351,51 +535,24 @@
     </div>
 </section>
 
-<section id="lageplan">
+<section id="directions">
     <div class="container">
         <div class="box">
             <div class="center">
-                <h2>Lageplan</h2>
-                <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
-            </div><!--/.center-->
-            <div class="big-gap"></div>
-            <div id="pricing-table" class="row">
-                <div class="col-sm-4">
-                    <ul class="plan">
-                        <li class="plan-name">Basic</li>
-                        <li class="plan-price">$29</li>
-                        <li>5GB Storage</li>
-                        <li>1GB RAM</li>
-                        <li>400GB Bandwidth</li>
-                        <li>10 Email Address</li>
-                        <li>Forum Support</li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                    </ul>
-                </div><!--/.col-sm-4-->
-                <div class="col-sm-4">
-                    <ul class="plan featured">
-                        <li class="plan-name">Standard</li>
-                        <li class="plan-price">$49</li>
-                        <li>10GB Storage</li>
-                        <li>2GB RAM</li>
-                        <li>1TB Bandwidth</li>
-                        <li>100 Email Address</li>
-                        <li>Forum Support</li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                    </ul>
-                </div><!--/.col-sm-4-->
-                <div class="col-sm-4">
-                    <ul class="plan">
-                        <li class="plan-name">Advanced</li>
-                        <li class="plan-price">$199</li>
-                        <li>30GB Storage</li>
-                        <li>5GB RAM</li>
-                        <li>5TB Bandwidth</li>
-                        <li>1000 Email Address</li>
-                        <li>Forum Support</li>
-                        <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                    </ul>
-                </div><!--/.col-sm-4-->
+                <h2>Anfahrt</h2>
+
+                <input id="pac-input" class="controls" type="text"
+                       placeholder="Ihr Abfahrtsort">
+                <div id="map" style="width:100%;height:50rem;"></div>
+
+                <address style="margin-top: 1.8rem;">
+                    <strong>Lessing-Gymnasium Lampertheim</strong><br>
+                    Biedensandstraße 55<br>
+                    68623 Lampertheim<br>
+                    Deutschland<br>
+                </address>
+
+                </div>
             </div>
         </div>
     </div>
