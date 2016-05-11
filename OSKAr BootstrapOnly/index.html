@@ -5,18 +5,14 @@
     <link rel="shortcut icon" type="image/x-icon" href="images/ownProj/favicon.ico">
     <title>Sportfest '16</title>
 
-    <!- CSS Files-->
+    <!-- CSS Files-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap-3.3.6-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/prettyPhoto.css">
 
-    <!- 3rd party libs-->
+    <!-- 3rd party libs-->
     <script src="js/ui-bootstrap-tpls-0.14.3.js"></script>
-    <!-[if lt IE 9]-->
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <!-[endif]-->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="js/jquery.isotope.min.js"></script>
@@ -24,9 +20,23 @@
     <script src="js/main.js"></script>
     <script src="controller.js"></script>
 
+    <!--Heise Plugin-->
+    <script type="text/javascript" src="js/heisePlugin/jquery.socialshareprivacy.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            if($('#socialshareprivacy').length > 0){
+                $('#socialshareprivacy').socialSharePrivacy({
+                    "css_path"  : "js/heisePlugin/socialshareprivacy/socialshareprivacy.css",
+                    "lang_path" : "js/heisePlugin/socialshareprivacy/lang/",
+                    "language"  : "de"
+                });
+            }
+        });
+    </script>
+
+    <!--Google Maps API-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU&signed_in=true&libraries=places" async defer></script>
-
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -633,10 +643,13 @@
                 </div>
             </div>
         </div>
+    
+            <div id="socialshareprivacy"></div>
     </div>
 </section>
 
-<footer id="footer"></footer>
+<footer id="footer">
+</footer>
 
 </body>
 </html>
