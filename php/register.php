@@ -4,6 +4,13 @@
 </head>
 <body>  
 <?php
+if (isset($_COOKIE['cookie'])) {
+    foreach ($_COOKIE['cookie'] as $name => $value) {
+        $name = htmlspecialchars($name);
+        $value = htmlspecialchars($value);
+        echo "Sie scheinen sich bereits registriert zu haben am : $value <br />\n";
+    }
+}
 require_once("db_const.php");
 if (!isset($_POST['submit'])) {
 ?>  <!-- The HTML registration form -->
@@ -52,12 +59,14 @@ if (!isset($_POST['submit'])) {
         # insert data into mysql database
         $sql = "INSERT  INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`) 
                 VALUES (NULL, '{$username}', '{$password}', '{$first_name}', '{$last_name}', '{$email}')";
+				
+		$timestamp = date("F j, Y, g:i a");
 		
-		setcookie( "LoginCookie", "RegestrierterUser innerhalb eines Monats", time()+(60*60*24*30) );
+		setcookie( "cookie[timeOfReg]", $timestamp );
 
         if ($mysqli->query($sql)) {
             //echo "New Record has id ".$mysqli->insert_id;
-            echo "<p>Erfolgreich regestriert!</p>";
+            echo "<p>Erfolgreich registriert!</p>";
         } else {
             echo "<p>MySQL error no {$mysqli->errno} : {$mysqli->error}</p>";
             exit();
