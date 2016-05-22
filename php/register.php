@@ -52,6 +52,8 @@ if (!isset($_POST['submit'])) {
         # insert data into mysql database
         $sql = "INSERT  INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`) 
                 VALUES (NULL, '{$username}', '{$password}', '{$first_name}', '{$last_name}', '{$email}')";
+		
+		setcookie( "LoginCookie", "RegestrierterUser innerhalb eines Monats", time()+(60*60*24*30) );
 
         if ($mysqli->query($sql)) {
             //echo "New Record has id ".$mysqli->insert_id;
@@ -61,6 +63,7 @@ if (!isset($_POST['submit'])) {
             exit();
         }
     }
+	
 }
 ?>      
 </body>
