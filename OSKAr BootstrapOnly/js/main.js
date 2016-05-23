@@ -1,21 +1,21 @@
 jQuery(function($) {
 
-	$(function(){
-		$('#main-slider.carousel').carousel({
-			interval: 10000,
-			pause: false
-		});
-	});
+	//$(function(){
+	//	$('#main-slider.carousel').carousel({
+	//		interval: 10000,
+	//		pause: false
+	//	});
+	//});
 
 	//Ajax contact
-	var form = $('.contact-form');
-	form.submit(function () {
-		$this = $(this);
-		$.post($(this).attr('action'), function(data) {
-			$this.prev().text(data.message).fadeIn().delay(3000).fadeOut();
-		},'json');
-		return false;
-	});
+	//var form = $('.contact-form');
+	//form.submit(function () {
+	//	$this = $(this);
+	//	$.post($(this).attr('action'), function(data) {
+	//		$this.prev().text(data.message).fadeIn().delay(3000).fadeOut();
+	//	},'json');
+	//	return false;
+	//});
 
 	//smooth scroll
 	$('.navbar-nav > li').click(function(event) {
@@ -27,9 +27,9 @@ jQuery(function($) {
 	});
 
 	//scrollspy
-	$('[data-spy="scroll"]').each(function () {
-		var $spy = $(this).scrollspy('refresh')
-	})
+	//$('[data-spy="scroll"]').each(function () {
+	//	var $spy = $(this).scrollspy('refresh')
+	//})
 
 	//PrettyPhoto
 	$("a.preview").prettyPhoto({
