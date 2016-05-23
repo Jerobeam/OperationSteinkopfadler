@@ -48,7 +48,7 @@ a:focus {
   z-index: 99999;
 }
 #main-slider {
-  background-image: url(../images/ownProj/startposition_sprint2.jpg);
+  background-image: url(../images/banner.jpg);
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 50%;
@@ -476,7 +476,7 @@ a:focus {
   margin-left: 20px;
   width: 200px;
   height: 78px;
-  background: url(../images/ownProj/logosmallorange.png) no-repeat 0 50%;
+  background: url(../images/logo.png) no-repeat 0 50%;
 }
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
@@ -653,16 +653,16 @@ textarea#message {
 }
 
 .background-event-weitsprung{
-  background-image: url(../images/ownProj/events/Weitsprung.jpg);
+  background-image: url(../images/events/Weitsprung.jpg);
 }
 .background-event-weitwurf{
-  background-image: url(../images/ownProj/events/Weitwurf.jpg);
+  background-image: url(../images/events/Weitwurf.jpg);
 }
 .background-event-schwimmen{
-  background-image: url(../images/ownProj/events/Schwimmen.jpg);
+  background-image: url(../images/events/Schwimmen.jpg);
 }
 .background-event-sprint{
-  background-image: url(../images/ownProj/events/Sprint.jpg);
+  background-image: url(../images/events/Sprint.jpg);
 }
 
 .modal {
@@ -725,4 +725,9 @@ textarea#message {
   font-family: Roboto;
   font-size: 13px;
   font-weight: 300;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
 }
