@@ -1,2 +1,0 @@
-# OperationSteinkopfadler
-Sportfestprojekt für Webentwicklung
