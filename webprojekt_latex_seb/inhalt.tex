@@ -32,8 +32,34 @@ Für den Fall, dass der Nutzer der Website von außerhalb des Ortes der Schule k
 
 Auf dem Bild ist nicht nur der Standort der Schule vermerkt, sondern darüberhinaus kann der User über ein Eingabefeld links oben seine Abfahrtsadresse eingeben, sodass die optimale Route auf der Karte angezeigt wird. Des Weiteren wurde mit Hilfe der Autocomplete Funktion der Google Maps API eine automatische Vervollständigung der Adresse bei Eingabe in das Adressfeld implementiert, wie auf dem Screenshot zu sehen ist.
 \par
-Verwirklicht wurde die Einbindung, indem zuerst
+Verwirklicht wurde die Einbindung, indem zuerst die Google Maps API und die Google Maps API für die Google Places per <script>-Tag in den <head> der Website importiert wurde (siehe \vref{fig:googleMapsAPI}).
 
+\begin{figure}[!htbp]
+	\makebox[\textwidth]{ 
+		\includegraphics[scale=0.8]{img/googleMapsAPI.png}}
+	\caption{API Einbindung von Google Maps}
+	\label{fig:googleMapsAPI}
+\end{figure}
+
+Danach wird über eine JavaScript-Funktion, ebenfalls im <head>-Bereich die Map erstellt (siehe \vref{fig:googleMapsInit})
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth]{ 
+		\includegraphics[scale=1]{img/googleMapsInit.png}}
+	\caption{initMap-Funktion zur Erstellung der Karte}
+	\label{fig:googleMapsInit}
+\end{figure}
+
+Im zweiten Teil der selben Funktion wird die Autocomplete-Funktion für das Input-Feld implementiert (siehe \vref{fig:googleMapsInit2}).
+
+\begin{figure}[!htbp]
+	\makebox[\textwidth]{ 
+		\includegraphics[scale=1]{img/googleMapsInit2.png}}
+	\caption{Init-Function}
+	\label{fig:googleMapsInit2}
+\end{figure}
+
+Die Route wird im letzten Teil der Funktion...
 
 
 \section{Einbindung von Social Buttons mittels des Heise Plugins}
