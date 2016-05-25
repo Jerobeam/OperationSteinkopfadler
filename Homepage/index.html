@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Sportfest '16</title>
+
+    <!-- CSS Files-->
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome-4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/prettyPhoto.css">
+
+    <!-- 3rd party libs-->
+    <script src="js/ui-bootstrap-tpls-0.14.3.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+
+	<!-- Websocket init-->
+	<script src="js/websocket.js"></script>
+
+    <!--Heise Plugin-->
+    <!--load Heise Plugin Script-->
+    <script type="text/javascript" src="js/heisePlugin/jquery.socialshareprivacy.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            //check with id-selector if element "socialshareprivacy" exists
+            if($('#socialshareprivacy').length > 0){
+                //if yes, fill it with via the function "socialSharePrivacy"
+                $('#socialshareprivacy').socialSharePrivacy({
+                    "css_path"  : "js/heisePlugin/socialshareprivacy/socialshareprivacy.css",
+                    "lang_path" : "js/heisePlugin/socialshareprivacy/lang/",
+                    "language"  : "de"
+                });
+            }
+        });
+    </script>
+
+    <!--Google Maps API-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU"></script>
+    <!--Google Maps Places API-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArjATMfvLEqtP7-xPvyxwzWjV6LFKS3YU&signed_in=true&libraries=places"
+            async defer></script>
+
+    <script>
+        function initMap() {
+            //Create Map
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 49.599314, lng: 8.4545},
+                zoom: 16
+            });
+
+            //Create InfoWindow for the marker
+            var infowindow = new google.maps.InfoWindow();
+            //Create Service for Google Places
+            var service = new google.maps.places.PlacesService(map);
+            //Variable for Location of School
+            var schoolLocation = null;
+            //Variable for Location of User
+            var startLocation = null;
+
+            //get School Location via Google Places and set Marker on Map
+            service.getDetails({
+                placeId: 'ChIJlf_d5AjTl0cRbmXEXCuGo1I'
+            }, function(place, status) {
+                //write school Position
+                schoolLocation = place.geometry.location;
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: schoolLocation
+                    });
+                    //show the InfoWindow when clicked
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(place.name);
+                        infowindow.open(map, this);
+                    });
+                }
+            });
+
+            //Input Field for Address-Userinput
+            var input = /** @type {!HTMLInputElement} */(document.getElementById('pac-input'));
+            {
+                var types = document.getElementById('type-selector');
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+            }
+
+            //Create Autocomplete Functionality
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+            //Create marker which will be located to the users address
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+
+            //Add place_changed-Listener to Autocomplete,
+            autocomplete.addListener('place_changed', function() {
+                infowindow.close();
+                marker.setVisible(false);
+                //get place from autocomplete
+                var place = autocomplete.getPlace();
+                //set startLocation (user's address) to location from autocomplete
+                startLocation = place.geometry.location;
+                {
+                    if (!place.geometry) {
+                        window.alert("Autocomplete's returned place contains no geometry");
+                        return;
+                    }
+                    // If the place has a geometry, then present it on a map.
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
+                }
+
+                //set marker's property, change position and make it visible
+                marker.setIcon(/** @type {google.maps.Icon} */({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                //Get Address from place
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+                //Write Address into infowindow for the marker of the user's address and open it
+                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                infowindow.open(map, marker);
+
+                //create route
+                var directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                });
+                //set destination, origin and travel mode
+                var request = {
+                    destination: schoolLocation,
+                    origin: startLocation,
+                    travelMode: google.maps.TravelMode.DRIVING
+                };
+
+                //pass the directions request to the directions service.
+                var directionsService = new google.maps.DirectionsService();
+                directionsService.route(request, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        // Display the route on the map.
+                        directionsDisplay.setDirections(response);
+                    }
+                });
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+
+</head>
+<body data-spy="scroll" data-target="#navbar" data-offset="0">
+<header id="header" role="banner">
+    <div class="container">
+        <div id="navbar" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#main-slider"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#competitions">Wettkämpfe</a></li>
+                    <li><a href="#gallery">Gallerie</a></li>
+                    <li><a href="#directions">Anfahrt</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                    <li><a href="#login">Log In</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="main-slider" class="carousel">
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-content">
+                    <h1 class="boxed">Sommersportfest 2016</h1>
+                    <p class="lead boxed">26. Sportfest des <b>Lessing-Gymnasium Lampertheim</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="competitions">
+    <div class="container">
+        <div class="box">
+            <div class="center gap">
+                <h2>Wettkämpfe</h2>
+            </div>
+            <div class="row">
+
+                <!--Item Jumping-->
+                <div class="col-sm-6">
+                    <div class="center">
+                        <i class="events-objects background-event-weitsprung"></i>
+                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalJumping" onclick="onJumpingClick()">Weitsprung</button></h4>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function onJumpingClick() {
+                        if(jumpingBest != null){
+                            document.getElementById("jumpingLabel").innerHTML = jumpingBest + " Meter";
+                        }else{
+                            document.getElementById("jumpingLabel").innerHTML = "Bitte logge Dich für diese Information ein"
+                        }
+                    }
+                </script>
+
+                <!-- Modal Jumping -->
+                <div class="modal fade" id="modalJumping" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste Weitsprung</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th>Sprung</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morato</td>
+                                    <td>10c</td>
+                                    <td>50 Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>4,5 Meter DAAAMN!</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Dein bester Sprung: <b><label id="jumpingLabel"></label></b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Swimming-->
+                <div class="col-sm-6">
+                    <div class="center">
+                        <i class="events-objects background-event-schwimmen"></i>
+                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalSwimming" onclick="onSwimmingClick()">Schwimmen</button></h4>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function onSwimmingClick() {
+                        if(swimmingBest != null){
+                            document.getElementById("swimmingLabel").innerHTML = swimmingBest + " Min.";
+                        }else{
+                            document.getElementById("swimmingLabel").innerHTML = "Bitte logge Dich für diese Information ein"
+                        }
+                    }
+                </script>
+
+                <!-- Modal Swimming -->
+                <div class="modal fade" id="modalSwimming" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste 100m Schwimmen</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th>Zeit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morato</td>
+                                    <td>10c</td>
+                                    <td>1 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>2 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Min. 50 Sek.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Deine Zeit: <b><label id="swimmingLabel"></label></b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Throwing-->
+                <div class="col-sm-6" style="margin-top: 5rem;">
+                    <div class="center">
+                        <i class="events-objects background-event-weitwurf"></i>
+                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalThrowing" onclick="onThrowingClick()">Weitwurf</button></h4>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function onThrowingClick() {
+                        if(throwingBest != null){
+                            document.getElementById("throwingLabel").innerHTML = throwingBest + " Meter";
+                        }else{
+                            document.getElementById("throwingLabel").innerHTML = "Bitte logge Dich für diese Information ein"
+                        }
+                    }
+                </script>
+
+                <!-- Modal Throwing -->
+                <div class="modal fade" id="modalThrowing" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste Weitwurf</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th Wurf</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>10c</td>
+                                    <td>Unendlich Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>80 Meter</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Dein bester Wurf: <b><label id="throwingLabel"></label></b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Item Running-->
+                <div class="col-sm-6" style="margin-top: 5rem;">
+                    <div class="center">
+                        <i class="events-objects background-event-sprint"></i>
+                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalRunning" onclick="onRunningClick()">Sprint</button></h4>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    function onRunningClick() {
+                        if(runningBest != null){
+                            document.getElementById("runningLabel").innerHTML = runningBest + " Sekunden";
+                        }else{
+                            document.getElementById("runningLabel").innerHTML = "Bitte logge Dich für diese Information ein"
+                        }
+                    }
+                </script>
+
+                <!-- Modal Running -->
+                <div class="modal fade" id="modalRunning" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Bestenliste 100m Sprint</h4>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Klasse</th>
+                                    <th Zeit</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Rouven Fucking Adam Morate</td>
+                                    <td>10c</td>
+                                    <td>0 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bouuzie</td>
+                                    <td>11a</td>
+                                    <td>10 Sek.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Vincent Manz</td>
+                                    <td>9b</td>
+                                    <td>1 Meter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal-body">
+                                <p>Deine beste Zeit: <b><label id="runningLabel"></label></b></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="container">
+        <div class="box">
+            <div class="center gap">
+                <h2>Gallerie</h2>
+            </div>
+            <ul class="gallery-filter">
+                <li><a class="btn btn-primary active" href="#" data-filter="*">Alle</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".jumping">Weitsprung</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".swimming">Schwimmen</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".throwing">Weitwurf</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".running">Sprint</a></li>
+            </ul>
+            <ul class="gallery-items col-4">
+                <li class="gallery-item running">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/running8a.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="100m Sprint der 8a (Jungs)" href="images/gallery/running8a.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>100m Sprint der 8a (Jungs)</h5>
+                    </div>
+                </li>
+                <li class="gallery-item throwing">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/throwing7c.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Weitwurf der 7c" href="images/gallery/throwing7c.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Weitwurf der 7c</h5>
+                    </div>
+                </li>
+                <li class="gallery-item swimming">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/swimming5a.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Schwimmteam der 5a" href="images/gallery/swimming5a.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Schwimmteam der 5a</h5>
+                    </div>
+                </li>
+                <li class="gallery-item jumping">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/jumping6b.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Weitsprung der 6b" href="images/gallery/jumping6b.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Weitsprung der 6b</h5>
+                    </div>
+                </li>
+                <li class="gallery-item swimming">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/swimming7b.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="50m Schwimmen der 7b" href="images/gallery/swimming7b.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>50m Schwimmen der 7b</h5>
+                    </div>
+                </li>
+                <li class="gallery-item jumping">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/jumping10b.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Weitsprung der Mädchen aus der 10b" href="images/gallery/jumping10b.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Weitsprung der Mädchen aus der 10b</h5>
+                    </div>
+                </li>
+                <li class="gallery-item">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/together1.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Foto von der Tribüne" href="images/gallery/together1.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Foto von der Tribüne</h5>
+                    </div>
+                </li>
+                <li class="gallery-item running">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/running7d.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="100m Sprint der Mädchen aus der 7d" href="images/gallery/running7d.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>100m Sprint der Mädchen aus der 7d</h5>
+                    </div>
+                </li>
+                <li class="gallery-item jumping">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/jumping_rouven_7b.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Rouven (7b) beim Weitsprung" href="images/gallery/jumping_rouven_7b.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Rouven (7b) beim Weitsprung</h5>
+                    </div>
+                </li>
+                <li class="gallery-item running">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/running5e.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="50m Sprint der 5e" href="images/gallery/running5e.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>50m Sprint der 5e</h5>
+                    </div>
+                </li>
+                <li class="gallery-item throwing">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/throwing6c.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Weitwurf der 6c" href="images/gallery/throwing6c.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Weitwurf der 6c</h5>
+                    </div>
+                </li>
+                <li class="gallery-item running">
+                    <div class="item-inner">
+                        <div class="gallery-image">
+                            <img src="images/gallery/winner_running9a.jpg" alt="">
+                            <div class="overlay">
+                                <a class="preview btn btn-danger" title="Siegerin des 100m Sprints der 9a" href="images/gallery/winner_running9a.jpg"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <h5>Siegerin des 100m Sprints der 9a</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="directions">
+    <div class="container">
+        <div class="box">
+            <div class="center">
+                <h2>Anfahrt</h2>
+
+                <!--Input field for user's address-->
+                <input id="pac-input" class="controls" type="text"
+                       placeholder="Ihr Abfahrtsort">
+                <!--div to display map-->
+                <div id="map" style="width:100%;height:50rem;"></div>
+
+                <address style="margin-top: 1.8rem;">
+                    <strong>Lessing-Gymnasium Lampertheim</strong><br>
+                    Biedensandstraße 55<br>
+                    68623 Lampertheim<br>
+                    Deutschland<br>
+                </address>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="box">
+            <div class="center">
+                <h2>Kontakt</h2>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-sm-4 col-centered">
+                        <div class="contact-haist">
+                            <p><img class="img-responsive img-thumbnail img-circle" src="images/Haist.jpg" alt="" ></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-centered" style="text-align: center">
+                        <address>
+                            <strong>Dr. Jürgen Haist</strong><br>
+                            Schuldirektor<br>
+                            Hagenstraße 48<br>
+                            68623 Lampertheim<br>
+                            juergen.haist@lgl.de
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="login">
+    <div class="container">
+        <div class="box last">
+            <div class="row">
+                <h1>Log In</h1>
+                <form class="">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input id="usernameInput" type="text" class="form-control" required="required" placeholder="Username">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input id="passwordInput" type="password" class="form-control" required="required" placeholder="Passwort">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" onclick="onLoginClick()">Login</button>
+                        </div>
+                    </div>
+                </form>
+
+                <script type="text/javascript">
+                    var jumpingBest = null;
+                    var swimmingBest = null;
+                    var throwingBest = null;
+                    var runningBest = null;
+                    function onLoginClick() {
+                        var username = document.getElementById("usernameInput").value;
+                        var password = document.getElementById("passwordInput").value;
+                        $.ajax({
+                            url: 'http://localhost:3000/getUser/' + username + '/' + password,
+                            type: "GET",
+                            dataType: "json",
+                            success: function (data) {
+                                if(data !=null){
+                                    jumpingBest = data[0].jumping;
+                                    swimmingBest = data[0].swimming;
+                                    throwingBest = data[0].throwing;
+                                    runningBest = data[0].running;
+                                    alert("Login erfolgreich");
+                                }
+                            },
+                            error: function(){
+                                alert("Login fehlgeschlagen");
+                            }
+                        });
+                    }
+                </script>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                         <!--<iframe  height="300" frameBorder="0" scrolling="no" src="http://localhost/php/login.php"></iframe> -->
+                         <iframe scrolling="no" frameBorder="0" src="http://localhost/php/register.php"></iframe>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+					    <iframe height="450" width="500" scrolling="no" frameBorder="0" src="canvas/canvas.html"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+            <div id="socialshareprivacy"></div>
+    </div>
+</section>
+
+<footer id="footer">
+<div id="websocketMessageContainer"></div>
+</footer>
+
+</body>
+</html>
