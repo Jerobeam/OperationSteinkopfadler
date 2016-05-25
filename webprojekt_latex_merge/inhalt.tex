@@ -2,7 +2,7 @@
 \label{Einleitung}
 Im Rahmen der Vorlesung \textit{Webprogrammierung} galt es als Projekt, eine Website zu erstellen, welche ein Schulsportfest in freier Art und Weise unterstützt. Dabei mussten verschiedene Technologien aus dem Bereich der Webprogrammierung eingesetzt werden, um für diese eine Grundverständnis zu entwickeln.
 \par
-Die in dieser Ausarbeitung behandelte Internetseite unterstützt Teilnehmer und Teilhaber vor, während und nach dem Fest: So kann sich z.B. ein Auswärtiger vor oder am Tage des Sportfestes eine Anfahrtsbeschreibung anschauen, Wettkämpfer können danach eigene Bestwerte betrachten. Auch entstandene Fotos sind in einer Gallerie für jedermann zugänglich.
+Die in dieser Ausarbeitung behandelte Internetseite unterstützt Teilnehmer und Teilhaber vor, während und nach dem Fest: So kann sich z.B. ein Auswärtiger vor oder am Tage des Sportfestes eine Anfahrtsbeschreibung anschauen, Wettkämpfer können danach eigene Bestwerte betrachten. Oder auch entstandene Fotos sind in einer Galerie für jedermann zugänglich.
 \par
 Diese Arbeit beschreibt die benutzten und geforderten Technologien, indem zuerst jene der Benutzeroberfläche erläutert werden. Danach werden die Technologien für die Client-Server-Architektur durchleuchtet.
 
@@ -18,26 +18,26 @@ Dazu zählen:
 	\item eine Navigationsbar
 	\item ein Banner
 	\item eine Übersicht der Wettkämpfe und Dialoge zur Anzeige der Wettkampfergebnisse
-	\item eine filterbare Gallerie
-	\item einer Anfahrtsbeschreibung mit Google Maps
+	\item eine filterbare Galerie
+	\item eine Anfahrtsbeschreibung mit Google Maps
 	\item Kontaktinformationen
-	\item ein Bereich für den Log In, die Registrierung \item ein kleines Spiel zum Zeitvertreib
-	\item das Heise Plugin für Social Buttons
+	\item ein Bereich für den Log In und die Registrierung \item ein kleines Spiel zum Zeitvertreib
+	\item das Heise Plug-In für Social Buttons
 	\item ein Footer mit der Serverzeit	
 \end{itemize}
-Auf viele dieser Punkte wird im weitern Verlauf der Arbeit eingegangen. Zudem befinden sich im Anhang Bilder von den Bereichen der Seite, welche nicht weiter genauer behandelt werden.
+Auf viele dieser Punkte wird im weiteren Verlauf der Arbeit eingegangen. Zudem befinden sich im Anhang Bilder von den Bereichen der Seite, welche nicht genauer behandelt werden.
 
 \section{CSS}
 \label{CSS}
 \subsection{Bootstrap}
 \label{Bootstrap}
-Zur optischen Verschönerung der Seite wurde das CSS Framework Bootstrap von Twitter eingebunden, was durch ein \textit{<script>}-Tag im \textit{<head>} importiert wurde. Angewendet wird das Framework dann durch Benutzen seiner CSS-Klassen auf das gewünschte HTML-Element. Bspw. lassen sich durch die Klasse \textit{"'btn-lg"'} visuell ansprechende, große, farbige Buttons mit sattem Text und abgerundeten Ecken erzeugen (auch zu sehen in Abbildung \vref{fig:responsive}).
+Zur optischen Verschönerung der Seite wurde das CSS-Framework Bootstrap von Twitter eingebunden, was durch ein \textit{<script>}-Tag im \textit{<head>} importiert wurde. Angewendet wird das Framework dann durch Benutzen seiner CSS-Klassen auf das gewünschte HTML-Element. Bspw. lassen sich durch die Klasse \textit{"'btn-lg"'} visuell ansprechende, große, farbige Buttons mit sattem Text und abgerundeten Ecken erzeugen (auch zu sehen in Abbildung \vref{fig:responsive}).
 \par
-Darüber hinaus wurden für dieses Projekt allerdings auch eigene CSS-Klassen geschrieben, auf welche an dieser Stelle aber nicht genau eingangen werden.
+Darüber hinaus wurden für dieses Projekt auch eigene CSS-Klassen geschrieben, auf welche an dieser Stelle aber nicht genau eingegangen werden.
 
 \subsection{Kompatibilität mit mobilen Endgeräten}
 \label{Kompatibilität mit mobilen Endgeräten}
-Ein weiterer Vorteil des Twitter Bootstrap ist, dass die Website \textit{"'responisve"'} ist, was bedeutet, dass sich die Seite der Fenstergröße anpasst. Dadurch ist sie auch für mobile Endgeräte kompatibel: Bei Verkleinerung des Fensters ordnen sich die Seitenelemente automatisch neu an und die Navigationsbar oben wird durch einen Menü-Button komprimiert (siehe Abbildung \vref{fig:responsive}).
+Ein weiterer Vorteil des Twitter Bootstrap Frameworks ist, dass die Website \textit{"'responisve"'} ist, was bedeutet, dass sich die Seite der Fenstergröße anpasst. Dadurch ist sie auch für mobile Endgeräte kompatibel: Bei Verkleinerung des Fensters ordnen sich die Seitenelemente automatisch neu an und die Navigationsbar oben wird durch einen Menü-Button komprimiert (siehe Abbildung \vref{fig:responsive}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -46,42 +46,42 @@ Ein weiterer Vorteil des Twitter Bootstrap ist, dass die Website \textit{"'respo
 	\label{fig:responsive}
 \end{figure}
 
-\section{Clientseitiges Javascript für benutzerspezifische Seiteninhalte}
-\label{Clientseitiges Javascript}
-Um Frontend-seitige Anpassungen der Website vorzunehmen, ohne die komplette Seite neu laden zu müssen, wird JavaScript verwendet. In diesem Projekt wird es unter anderem verwendet, um zu überprüfen ob ein Nutzer angemeldet ist, und um daraus resultierend Wettkampfergebnisse des angemeldeten Benutzers anzuzeigen.
+\section{Clientseitiges JavaScript für benutzerspezifische Seiteninhalte}
+\label{Clientseitiges JavaScript}
+Um Frontend-seitige Anpassungen der Website vorzunehmen, ohne die komplette Seite neu laden zu müssen, wird JavaScript verwendet. In diesem Projekt wird es unter anderem angewandt, um zu überprüfen, ob ein Nutzer angemeldet ist, und um daraus resultierend Wettkampfergebnisse des angemeldeten Benutzers anzuzeigen.
 \par
-Durch klicken auf den Knopf für die Ergebnisse wird dabei nicht nur ein Dialog aufgerufen, sondern auch eine Funktion ausgelöst (siehe Abbildung \vref{fig:javaScript}). Die globalen Variablen, welche in dieser Funktion benutzt wird, ist beim Aufruf der Seite \textit{null}, und wird erst nach erfolgreicher Anmeldung des Nutzers mit einem Wert belegt (siehe Kapitel \vref{Konsumieren der Daten im Frontent mit AJAX-Calls}).
+Durch klicken auf den Knopf für die Ergebnisse wird dabei nicht nur ein Dialog geöffnet, sondern auch eine Funktion aufgerufen (siehe Abbildung \vref{fig:javaScript}). Die globalen Variablen, welche in dieser Funktion benutzt werden, sind beim Aufruf der Seite \textit{null}, und werden erst nach erfolgreicher Anmeldung des Nutzers mit einem Wert belegt (siehe auch Kapitel \vref{Konsumieren der Daten im Frontend per AJAX-Call}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
 		\includegraphics[scale=0.8]{img/javaScript.png}}
-	\caption{Skript zur Darstellung der Wettkampfsergebnisse}
+	\caption{Skript zur Darstellung der Wettkampfergebnisse}
 	\label{fig:javaScript}
 \end{figure}
 
 \section{Anfahrtsbeschreibung per Google Maps}
 \label{Anfahrtsbeschreibung per Google Maps}
-Für den Fall, dass der Nutzer der Website von außerhalb des Ortes der Schule kommt, wurde eine Anfahrtbeschreibung mittels Google Maps eingebunden (siehe Abbildung \vref{fig:googleMaps}).
+Für den Fall, dass der Nutzer der Website von außerhalb des Ortes der Schule kommt, wurde eine Anfahrtsbeschreibung mittels der Google Maps API eingebunden (siehe Abbildung \vref{fig:googleMaps}).
 
-\begin{figure}[!h]
+\begin{figure}[!hp]
 	\makebox[\textwidth]{ 
 		\includegraphics[scale=0.5]{img/googleMaps.jpg}}
-	\caption{Anfahrtbeschreibung mit Google Maps}
+	\caption{Anfahrtsbeschreibung mit Google Maps}
 	\label{fig:googleMaps}
 \end{figure}
 
-Auf dem Bild ist nicht nur der Standort der Schule vermerkt, sondern darüberhinaus kann der User über ein Eingabefeld links oben seine Abfahrtsadresse eingeben, sodass die optimale Route auf der Karte angezeigt wird. Des Weiteren wurde mit Hilfe der Autocomplete Funktion der Google Maps API eine automatische Vervollständigung der Adresse bei Eingabe in das Adressfeld implementiert, wie auf dem Screenshot zu sehen ist.
+Auf dem Bild ist nicht nur der Standort der Schule vermerkt, sondern darüber hinaus kann der User über ein Eingabefeld links oben seine Abfahrtsadresse eingeben, sodass die optimale Route auf der Karte angezeigt wird. Des Weiteren wurde mit Hilfe der Autocomplete-Funktion der Google Maps API eine automatische Vervollständigung der Adresse bei Eingabe in das Adressfeld implementiert, wie auf dem Screenshot zu sehen ist.
 \par
 Verwirklicht wurde die Einbindung, indem zuerst die Google Maps API und die Google Maps API für die Google Places per \textit{<script>}-Tag in den \textit{<head>} der Website importiert wurde (siehe Abbildung \vref{fig:googleMapsAPI}).
 
-\begin{figure}[!h]
+\begin{figure}[!hp]
 	\makebox[\textwidth]{ 
 		\includegraphics[scale=0.8]{img/googleMapsAPI.png}}
 	\caption{API Einbindung von Google Maps}
 	\label{fig:googleMapsAPI}
 \end{figure}
 
-Danach wird über eine JavaScript-Funktion, ebenfalls im <head>-Bereich die Map erstellt (siehe Abbildung \vref{fig:googleMapsInit}).
+Danach wird über eine JavaScript-Funktion, ebenfalls im \textit{<head>}-Bereich die Map erstellt (siehe Abbildung \vref{fig:googleMapsInit}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -90,7 +90,7 @@ Danach wird über eine JavaScript-Funktion, ebenfalls im <head>-Bereich die Map 
 	\label{fig:googleMapsInit}
 \end{figure}
 
-Im zweiten Teil der selben Funktion wird die Autocomplete-Funktion für das Input-Feld implementiert und der Marker für die eingegebene Adresse auf der Karte gesetzt (siehe Abbildung \vref{fig:googleMapsInit2}).
+Im zweiten Teil derselben Funktion wird die Autocomplete-Funktion für das Input-Feld implementiert und der Marker für die eingegebene Adresse auf der Karte gesetzt (siehe Abbildung \vref{fig:googleMapsInit2}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -99,7 +99,7 @@ Im zweiten Teil der selben Funktion wird die Autocomplete-Funktion für das Inpu
 	\label{fig:googleMapsInit2}
 \end{figure}
 
-Die Route zwischen der Abfahrtsadresse und der Schule wird im letzten Teil der Funktion erstellt und angezeigt. Vor Schließen des \textit{<script>}-Tags wird noch ein Event-Listener hinzugefügt, welcher auf das Aufrufen der Seite wartet und bei diesem dann die Karte zeichnet, indem dann die Funktion \textit{initMap} ausgeführt wird (siehe Abbildung \vref{fig:googleMapsInit3}).
+Die Route zwischen der Abfahrtsadresse und der Schule wird im letzten Teil der Funktion erstellt und angezeigt. Vor Schließen des \textit{<script>}-Tags wird noch ein Event-Listener hinzugefügt, welcher auf das Aufrufen der Seite wartet und bei diesem dann die Karte zeichnet, indem die Funktion \textit{initMap} ausgeführt wird (siehe Abbildung \vref{fig:googleMapsInit3}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -108,7 +108,7 @@ Die Route zwischen der Abfahrtsadresse und der Schule wird im letzten Teil der F
 	\label{fig:googleMapsInit3}
 \end{figure}
 
-Um nun die Karte auch tatsächlich in der Website anzeigen zu können, wird zu guter Letzt noch \textit{div}-Container mit der Id \textit{"'map"'} an der Stelle, wo die Karte hingezeichnet werden soll, erstellt (siehe Abbildung \vref{fig:googleMapsDiv}). Dieses \textit{div} wird dann durch die Funktion \textit{initMap} gefüllt. Dafür wird bei Deklaration der Karte über einen Id-Selektor das entsprechende \textit{div} ausgewählt, in welchem die Google Map erscheinen soll (siehe Abbildung \vref{fig:googleMapsInit} (ganz oben)).
+Um nun die Karte auch tatsächlich in der Website anzeigen zu können, wurde zu guter Letzt noch ein \textit{div}-Container mit der Id \textit{"'map"'} an der gewünschten Stelle erstellt (siehe Abbildung \vref{fig:googleMapsDiv}). Dieses \textit{div} wird dann durch die Funktion \textit{initMap} gefüllt. Dafür wird bei Deklaration der Karte über einen Id-Selektor das entsprechende \textit{div} ausgewählt, in welchem die Google Map erscheinen soll (siehe ganz oben in Abbildung \vref{fig:googleMapsInit}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -122,11 +122,11 @@ Mittels Canvas wurde ein kleines Spiel f\"ur den Zeitvertreib implementiert. Dab
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb04.png}
 \newline
-Durch die \textit{Component} Funktion werden die Objekte, wie z.B. der Hintergrund und der Taucher erzeugt, dabei werden Bilddateien geladen, wie im folgender Abbildung zu erkennen ist: 
+Durch die \textit{Component}-Funktion werden die Objekte, wie z.B. der Hintergrund und der Taucher erzeugt, dabei werden Bilddateien geladen, wie in folgender Abbildung zu erkennen ist: 
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb05.png}
 \newline
-Die \textit{Component}-Funktion erh\"alt als Parameter die Koordinatenposition des \"ubergebenen Elements, wenn es sich um ein Bild handelt, wird mittels \textit{new Image()} ein Bild zum zeichnen auf dem Canvas erstellt. In der \textit{Update}-Funktion wird das Bild letztendlich gezeichnet, da diese Funktion mehrmals die Sekunde aufgerufen wird entsteht die Illusion einer Bewegung des Tauchers und des Hintergrundes. Dabei wird mittels der \textit{newPos}-Funktion daf\"ur sorge getragen, dass sich die logische Position des Bildes ver\"andert, die Variable \textit{speedY} und \textit{speedX} geben die Geschwindigkeit an mit der die Position ver\"andert wird. 
+Die \textit{Component}-Funktion erh\"alt als Parameter die Koordinatenposition des \"ubergebenen Elements, wenn es sich um ein Bild handelt, wird mittels \textit{new Image()} ein Bild zum Zeichnen auf dem Canvas erstellt. In der \textit{Update}-Funktion wird das Bild letztendlich gezeichnet, da diese Funktion mehrmals die Sekunde aufgerufen wird entsteht die Illusion einer Bewegung des Tauchers und des Hintergrundes. Dabei wird mittels der \textit{newPos}-Funktion daf\"ur Sorge getragen, dass sich die logische Position des Bildes ver\"andert, die Variable \textit{speedY} und \textit{speedX} geben die Geschwindigkeit an mit der die Position ver\"andert wird. 
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb06.png}
 \newline
@@ -143,27 +143,27 @@ Das Endergebnis l\"asst sich in nachfolgender Abbildung bewundern:
 \includegraphics[width=0.7\textwidth]{img/vincent/abb09.png}
 \newline
 
-\section{Einbindung von Social Buttons mittels des Heise Plugins}
-\label{Einbindung von Social Buttons mittels des Heise Plugins}
-Um soziale Netzwerke der Schule oder des Sportfestes auf der Seite verlinken zu können, wurden mittels des Heise Plugins Social Buttons eingebunden (Facebook, Twitter und Google+). Der Vorteil bei diesem Plugin liegt darin, dass der Nutzer selbst bestimmen kann, ob er diese Buttons benutzen möchte, oder komplett für die Seite deaktivieren will. Der Sinn dahinter liegt in der Datenschutzproblematik bei der Einbindung der "`Like"'-Buttons von Facebook und Co.: Das Einbinden dieser Buttons erfolgt über einen iFrame, welcher von Facebook und Co. selbst zur Verfügung gestellt wird. Der iFrame enthält Code, der veranlasst, dass die URL der Seite, Cookies der Seite an Facebook geschickt wird. Ist der Anwender zudem gleichzeitig in einem anderen Fenster bei Facebook angemeldet, so schickt das iFrame zusätzlich Sitzungs-Id mit, wodurch Facebook einen Webseitenaufruf einer konkreten Person zuordnen kann.
+\section{Einbindung von Social Buttons mittels des Heise Plug-Ins}
+\label{Einbindung von Social Buttons mittels des Heise Plug-Ins}
+Um soziale Netzwerke der Schule oder des Sportfestes auf der Seite verlinken zu können, wurden mittels des Heise Plug-Ins Social Buttons eingebunden (Facebook, Twitter und Google+). Der Vorteil bei diesem Plug-In liegt darin, dass der Nutzer selbst bestimmen kann, ob er diese Buttons benutzen möchte, oder komplett für die Seite deaktivieren will. Der Sinn dahinter liegt in der Datenschutzproblematik bei der Einbindung der "`Like"'-Buttons von Facebook und Co.: Das Einbinden dieser Buttons erfolgt über einen iFrame, welcher von Facebook und Co. selbst zur Verfügung gestellt wird. Der iFrame enthält Code, der veranlasst, dass die URL oder auch Cookies der aufgerufenen Seite an Facebook geschickt werden. Ist der Anwender zudem gleichzeitig in einem anderen Fenster bei Facebook angemeldet, so übermittelt das iFrame zusätzlich Sitzungs-Id, wodurch Facebook einen Webseitenaufruf einer konkreten Person zuordnen kann.
 \par
-Damit das also nicht passiert, dürfte die Seite entweder keinerlei Elemente von Facebook, Twitter und Google+ behinhalten, oder das Heise Plugin verhindert eben genau dies, indem all diese Elemente zunächst bei Aufruf der Seite deaktiviert sind. Möchte der Nutzer nun einer der Funktionen der sozialen Netzwerke nutzen, so muss er die entsprechende erst über das Plugin aktivieren.
+Damit das also nicht passiert, dürfte die Seite entweder keinerlei Elemente von Facebook, Twitter und Google+ beinhalten, oder das Heise Plug-In verhindert eben genau dies, indem all diese Elemente zunächst bei Aufruf der Seite deaktiviert sind. Möchte der Nutzer nun einer der Funktionen der sozialen Netzwerke nutzen, so muss er sie zuvor über das Plug-In aktiviert.
 \par
-In die Website integriert wurde das Plugin, indem zuerst das, von Heise zur Verfügung gestellte Skript des Plugins im \textit{<head>} geladen wird und ein HTML-Element durch ein weiteres Skript gefüllt wird (siehe Abbildung \vref{fig:heisePlugin1}).
+In die Website integriert wurde das Plug-In, indem zuerst das von Heise zur Verfügung gestellte Skript des Plug-Ins im \textit{<head>} geladen wird und ein HTML-Element durch ein weiteres Skript gefüllt wird (siehe Abbildung \vref{fig:heisePlugin1}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
 		\includegraphics[scale=1]{img/heisePlugin1.png}}
-	\caption{Integrieren des Heise Plugins}
+	\caption{Integrieren des Heise Plug-Ins}
 	\label{fig:heisePlugin1}
 \end{figure}
 
-Durch ein \textit{div}-Element mit Id \textit{"'socialshareprivacy"'} (wie es in Abbildung \vref{fig:heisePlugin1} selektiert wird) vor dem Footer der Seite wird das Plugin dann am Ende der Seite angezeigt (siehe Abbildung \vref{fig:heisePlugin2}).
+Durch ein \textit{div}-Element mit Id \textit{"'socialshareprivacy"'} vor dem Footer der Seite (wie es in Abbildung \vref{fig:heisePlugin1} selektiert wird) wird das Plug-In dann am Ende der Seite angezeigt (siehe Abbildung \vref{fig:heisePlugin2}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
 		\includegraphics[scale=1]{img/heisePlugin2.png}}
-	\caption{Heise Plugin in der Website}
+	\caption{Heise Plug-In in der Website}
 	\label{fig:heisePlugin2}
 \end{figure}
 
@@ -196,15 +196,15 @@ Nachdem sichergestellt wurde, dass die Daten f\"ur die Erstellung eines neuen Us
 \newline
 Im Coding wird auch ein Cookie gesetzt, dazu mehr im Abschnitt, welches sich mit dem Setzen und der Auswertung eines Cookies besch\"aftigt.	
 
-\section{Anmeldefunktion per AJAX-Calls}
-\label{Anmeldefunktion per AJAX-Calls}
-Ist ein Nutzer der Website gleichzeitig auch Teilnehmer des Sportfestes, was so viel bedeutet, dass für ihn Ergebnisse für Weitsprung, Sprint etc. in der Datenbank hinterlegt sind, kann er sich jene Ergebnisse anzeigen lassen, indem er sich anmeldet. Um diese Information von der Datenbank an das Frontend kommunizieren zu können bedarf es an einem Server, der sich mit der Datenbank verbindet und an einer Technologie, welche sich die benötigten Informationen von dem Server holt und an das Frontend bringt. 
+\section{Anmeldefunktion mit node.js und AJAX-Call}
+\label{Anmeldefunktion mit node.js und AJAX-Call}
+Ist ein Nutzer der Website gleichzeitig auch Teilnehmer des Sportfestes, was zugleich bedeutet, dass für ihn Ergebnisse für Weitsprung, Sprint etc. in der Datenbank hinterlegt sind, kann er sich jene Ergebnisse anzeigen lassen, indem er sich anmeldet. Um diese Information von der Datenbank an das Frontend kommunizieren zu können bedarf es an einem Server, der sich mit der Datenbank verbindet, und an einer Technologie, welche sich die benötigten Informationen von dem Server holt und an das Frontend bringt. 
 \par
-Für diese Website wurde ersteres mit einem REST-Service mit node.js und zweiteres mit jQuery AJAX-Calls realisiert, die den REST-Service konsumieren.
+Für diese Website wurde Ersteres mit einem REST-Service durch node.js und Zweites mit einem jQuery AJAX-Call realisiert, der den REST-Service konsumiert.
 
-\subsection{Bereitstellung eines REST-Service mit node.js}
-\label{Bereitstellung eines REST-Service mit node.js}
-Die Anbindung der MySQL-Datenbank wurden in node.js mit Hilfe des Plugins \textit{express} und \textit{mysql} verwirklicht. Nach deren Einbindung wird eine Datenbankverbindung aufgebaut und ein REST-Service erstellt, welcher sich über die URL \textit{"'localhost:3000/getUser/[username]/[password]} als GET-Request aufrufen lässt und dann die kompletten Userinfos als JSON-Objekt zurückgibt (siehe Abbildung \vref{fig:nodeServer1}).
+\subsection{Bereitstellung eines REST-Service durch node.js}
+\label{Bereitstellung eines REST-Service durch node.js}
+Die Anbindung der MySQL-Datenbank wurde in node.js mit Hilfe des Plug-Ins \textit{express} und \textit{mysql} verwirklicht. Nach deren Einbindung wird eine Datenbankverbindung aufgebaut und ein REST-Service erstellt, welcher sich über die URL \textit{"'localhost:3000/getUser/[username]/[password]} als GET-Request aufrufen lässt. Der Aufruf gibt dann die kompletten Userinfos als JSON-Objekt zurück (siehe Abbildung \vref{fig:nodeServer1}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -222,8 +222,8 @@ Zusätzlich wurden noch vor der Erstellung der Datenbankanbindung ein besonderer
 	\label{fig:nodeServer2}
 \end{figure}
 
-\subsection{Konsumieren der Daten im Frontent mit AJAX-Calls}
-\label{Konsumieren der Daten im Frontent mit AJAX-Calls}
+\subsection{Konsumieren der Daten im Frontend per AJAX-Call}
+\label{Konsumieren der Daten im Frontend per AJAX-Call}
 
 Meldet der Nutzer sich nun über folgendes Log-In-Fenster im unteren Teil der Website an...
 
@@ -246,15 +246,15 @@ Dies geschieht durch einen AJAX-Call, welcher bei der Anmeldung ausgeführt werd
 	\label{fig:ajaxCall}
 \end{figure}
 
-Durch den AJAX-Call werden globale JavaScript Variablen gesetzt, welche dann bei Aufruf des Dialogs abgefragt werden. Sind die Variablen bei Dialogaufruf leer bzw. ist der Nutzer nicht eingeloggt, so steht anstelle seines Wettkampfergebnisses ein Hinweis, dass der User sich für diese Information anmelden muss.
+Durch den AJAX-Call werden globale JavaScript Variablen gesetzt, welche dann bei Aufruf des Dialogs abgefragt werden. Sind die Variablen bei Dialogaufruf leer bzw. ist der Nutzer nicht eingeloggt, so steht anstelle seines Wettkampfergebnisses ein Hinweis, dass der User sich für diese Information anmelden muss (siehe auch Kapitel \vref{Clientseitiges JavaScript}).
 
 \section{Websockets zur Systemzeitabfrage}
 Eines der Ziele des Projekts war die Implementierung von Websockets, diese wurde mittels \textit{node.js} und der Bibliothek \textit{node.js-websocket}
-auf der Serverseite und mittels Javascript auf der Clientseite umgesetzt. Der Server horcht auf eingehende Verbindungen auf dem Port 8001. Sobald sich ein Client verbunden hat wird eine Event gefeuert und der Server sendet seine Systemzeit \"uber die Websocket-Verbindung an den Client, wie aus folgendem Coding zu entnehmen ist:  
+auf der Serverseite und mittels JavaScript auf der Clientseite umgesetzt. Der Server horcht auf eingehende Verbindungen auf dem Port 8001. Sobald sich ein Client verbunden hat wird eine Event gefeuert und der Server sendet seine Systemzeit \"uber die Websocket-Verbindung an den Client, wie aus folgendem Coding zu entnehmen ist:  
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb02.png}
 \newline
-Auf der Clientseite wird mittels Javascript ein Websocket erstellt, welcher ebenfalls Events feuert. Sobald die Verbindung aufgebaut ist, wird eine Probenachricht an den Server gesendet. Der Server wiederum sendet seine Systemzeit, diese wird dann mittels \textit{document.getElementById} f\"ur den User im Frontend dargestellt: 
+Auf der Clientseite wird mittels JavaScript ein Websocket erstellt, welcher ebenfalls Events feuert. Sobald die Verbindung aufgebaut ist, wird eine Probenachricht an den Server gesendet. Der Server wiederum sendet seine Systemzeit, diese wird dann mittels \textit{document.getElementById} f\"ur den User im Frontend dargestellt: 
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb03.png}
 \newline
@@ -290,11 +290,11 @@ Dem User wird angezeigt, ob er sich mit hoher Wahrscheinlichkeit schon registrie
 
 \chapter{Fazit}
 \label{Fazit}
-Nach Erstellung eines umfangreicheren und in sich abgeschlossenen Projekts, wie es bei dem Projekt dieser Ausarbeitung der Fall ist, ist es mehr oder weniger garantiert, ein fundiertes Grundverständnis trotz der hohen Anzahl an Anforderungen für die verwendeten Technologien zu entwickeln. 
+Nach Erstellung eines umfangreicheren und in sich abgeschlossenen Projekts, wie es bei dem Projekt dieser Ausarbeitung der Fall ist, ist es mehr oder weniger garantiert, ein fundiertes Grundverständnis, trotz der hohen Anzahl an Anforderungen, für die verwendeten Technologien zu entwickeln. 
 \par
-Durch die hohe Anzahl und Vielfältigkeit der technologischen Anforderungen wird allerdings auch sehr schnell deutlich: Es gibt Technologien, welche sich relativ unkompliziert umsetzen lassen, und welche, die umfangreicher und zeitaufwändiger sind. 
+Durch die hohe Anzahl und Vielfältigkeit der technologischen Anforderungen wird allerdings auch sehr schnell deutlich: Es gibt Technologien, welche sich relativ unkompliziert umsetzen lassen, und welche, die umfangreicher und wesentlich zeitaufwändiger sind. 
 \par
-Folglich reicht für die erstere Art ein Grundverständnis vollkommen aus. Ein Beispiel hierzu bietet das Heise Plugin: Durch ein kleines Skript und einem zugehörigen HTML-Element ist das Plugin schon komplett eingebunden. Die Funktionalitäten des Plugins können mit dem Grundverständnis darüber vollkommen ausgeschöpft werden.
+Folglich reicht für die erste Art ein Grundverständnis vollkommen aus. Ein Beispiel hierzu bietet das Heise Plug-In: Durch ein kleines Skript und einem zugehörigen HTML-Element ist das Plug-In schon komplett eingebunden. Die Funktionalitäten des Plug-Ins können mit dem Grundverständnis darüber vollkommen ausgeschöpft werden.
 \par
 Anders hingegen ist das bei komplexeren Anforderungen, wie z.B. node.js oder Google Maps. Mit einem Grundverständnis lassen sich zwar einigermaßen schnell eine Datenbankverbindung, ein Server oder eine Karte erstellen - jedoch sind node.js und die Google Maps API wesentlich mächtiger und umfangreicher. 
 \\
@@ -302,4 +302,4 @@ Mit node.js können bspw. \textit{"'Connection-Pools"'} zur Optimierung von glei
 \\
 Die API von Google Maps bietet umfassendere Kartenfunktionen, wie Streetview oder Satellitenkarten.
 \\
-Bei solchen Anforderungen ist ein tiefgründigeres Wissen über die Technologien von Nöten, um sie wirklich zu meistern.
+Bei solchen Anforderungen ist ein tiefgründiges Wissen über die Technologien von Nöten, um sie wirklich zu meistern.
