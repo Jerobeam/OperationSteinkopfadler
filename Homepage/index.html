@@ -291,15 +291,19 @@
                 <div class="col-sm-6">
                     <div class="center">
                         <i class="events-objects background-event-schwimmen"></i>
-                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal" data-target="#modalSwimming" onclick="onSwimmingClick()">Schwimmen</button></h4>
+                        <h4><button type="button" class="btn btn-info btn-lg" style="background-color: darkorange; width: 13rem" data-toggle="modal"
+                                    data-target="#modalSwimming" onclick="onSwimmingClick()">Schwimmen</button></h4>
                     </div>
                 </div>
 
                 <script type="text/javascript">
                     function onSwimmingClick() {
+                        //check if the global Variable "swimmingBest" is null
                         if(swimmingBest != null){
+                            //if it's not null change label in the dialog to the value of the variable
                             document.getElementById("swimmingLabel").innerHTML = swimmingBest + " Min.";
                         }else{
+                            //if it's null change label to an info
                             document.getElementById("swimmingLabel").innerHTML = "Bitte logge Dich für diese Information ein"
                         }
                     }
@@ -725,27 +729,33 @@
                 </form>
 
                 <script type="text/javascript">
+                    //declare global variables which can be accessed in the display dialog afterwards
                     var jumpingBest = null;
                     var swimmingBest = null;
                     var throwingBest = null;
                     var runningBest = null;
                     function onLoginClick() {
+                        //get value of the input fields
                         var username = document.getElementById("usernameInput").value;
                         var password = document.getElementById("passwordInput").value;
+                        //perform ajax call with username and password as url-parameter
                         $.ajax({
                             url: 'http://localhost:3000/getUser/' + username + '/' + password,
                             type: "GET",
                             dataType: "json",
                             success: function (data) {
-                                if(data !=null){
+                                if(data != null){
+                                    //in case of success, write values into global variables
                                     jumpingBest = data[0].jumping;
                                     swimmingBest = data[0].swimming;
                                     throwingBest = data[0].throwing;
                                     runningBest = data[0].running;
+                                    //show success message
                                     alert("Login erfolgreich");
                                 }
                             },
                             error: function(){
+                                //in case of error, show alert
                                 alert("Login fehlgeschlagen");
                             }
                         });
