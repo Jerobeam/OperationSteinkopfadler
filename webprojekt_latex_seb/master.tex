@@ -25,13 +25,22 @@
 
 %	Konfigurationsdatei einziehen
 \input{config}
+
 \usepackage{setspace}
+
 \begin{document}
 
 \input{titlepage}
 
 \pagenumbering{roman} % Römische Seitennummerierung
 \normalfont
+
+\setstretch{1}
+
+\chapter*{Vorwort}
+Soweit im Folgenden Berufs-, Gruppen- oder Personenbezeichnungen verwendet werden, so ist stets auch die jeweils weibliche Form gemeint. Zu Gunsten des Leseflusses wird daher bewusst von einer genderneutralen Ausdrucksweise abgesehen.
+\par
+Um Redundanzen zu vermeiden, wurden bei manchen Stellen in der Arbeit von genaueren Erklärungen zu Quellcodeabschnitten im Text abgesehen - in diesen Fällen sind erläuternde Kommentare in den Screenshots oder in dem Code-Listing selbst vertreten.
 
 %--------------------------------
 % Verzeichnisse - nicht benötige Verzeichnisse bitte auskommentieren / löschen.
@@ -61,7 +70,6 @@
 \clearpage 
 \ihead{\chaptername~\thechapter} % Neue Header-Definition
 \pagenumbering{arabic}  % Arabische Seitenzahlen
-
 
 \setstretch{1,5}
 %	Einleitungs-Datei einziehen
