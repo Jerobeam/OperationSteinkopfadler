@@ -14,12 +14,10 @@ canvas {
 
 var myGamePiece;
 var myBackground;
-var myObstacle;
 
 function startGame() {
     myGamePiece = new component(30, 30, "swimmer.gif", 10, 120, "image");
-    myBackground = new component(656, 270, "water.jpg", 0, 0, "background");
-	//myObstacle = new component(10, 10, "black", 300, 120); 
+    myBackground = new component(656, 270, "water.jpg", 0, 0, "background"); 
     myGameArea.start();
 }
 
@@ -89,7 +87,6 @@ function updateGameArea() {
     myBackground.update();
     myGamePiece.newPos();    
     myGamePiece.update();
-	myObstacle.update();
 }
 
 function move(dir) {

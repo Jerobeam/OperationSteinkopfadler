@@ -13,7 +13,7 @@ $text_color = imagecolorallocate($im, $R, $G, $B);
 //font
 $font = './fonts/Black.ttf';
 
-imagettftext($im, 50.0, 0.0, 50, 50, $text_color, $font , 'Willkommen auf der Sportfest Seite!');
+imagettftext($im, 50.0, 0.0, 50, 50, $text_color, $font , 'Viel Erfolg bei den Wettkämpfen!');
 
 // buffering
 ob_start();
