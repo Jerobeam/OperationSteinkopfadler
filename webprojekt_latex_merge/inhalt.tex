@@ -204,7 +204,7 @@ Für diese Website wurde Ersteres mit einem REST-Service durch node.js und Zweit
 
 \subsection{Bereitstellung eines REST-Service durch node.js}
 \label{Bereitstellung eines REST-Service durch node.js}
-Die Anbindung der MySQL-Datenbank wurde in node.js mit Hilfe des Plug-Ins \textit{express} und \textit{mysql} verwirklicht. Nach deren Einbindung wird eine Datenbankverbindung aufgebaut und ein REST-Service erstellt, welcher sich über die URL \textit{"'localhost:3000/getUser/[username]/[password]} als GET-Request aufrufen lässt. Der Aufruf gibt dann die kompletten Userinfos als JSON-Objekt zurück (siehe Abbildung \vref{fig:nodeServer1}).
+Die Anbindung der MySQL-Datenbank wurde in node.js mit Hilfe des Plug-Ins \textit{express} und \textit{mysql} verwirklicht. Nach deren Einbindung wird eine Datenbankverbindung aufgebaut und ein REST-Service erstellt, welcher sich über die URL \textit{"'localhost:3000/getUser/[username]/[password]"'} als GET-Request aufrufen lässt. Der Aufruf gibt dann die kompletten Userinfos als JSON-Objekt zurück (siehe Abbildung \vref{fig:nodeServer1}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -248,6 +248,7 @@ Dies geschieht durch einen AJAX-Call, welcher bei der Anmeldung ausgeführt werd
 
 Durch den AJAX-Call werden globale JavaScript Variablen gesetzt, welche dann bei Aufruf des Dialogs abgefragt werden. Sind die Variablen bei Dialogaufruf leer bzw. ist der Nutzer nicht eingeloggt, so steht anstelle seines Wettkampfergebnisses ein Hinweis, dass der User sich für diese Information anmelden muss (siehe auch Kapitel \vref{Clientseitiges JavaScript}).
 
+\pagebreak
 \section{Websockets zur Systemzeitabfrage}
 Eines der Ziele des Projekts war die Implementierung von Websockets, diese wurde mittels \textit{node.js} und der Bibliothek \textit{node.js-websocket}
 auf der Serverseite und mittels JavaScript auf der Clientseite umgesetzt. Der Server horcht auf eingehende Verbindungen auf dem Port 8001. Sobald sich ein Client verbunden hat wird eine Event gefeuert und der Server sendet seine Systemzeit \"uber die Websocket-Verbindung an den Client, wie aus folgendem Coding zu entnehmen ist:  
