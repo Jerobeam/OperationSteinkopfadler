@@ -18,16 +18,17 @@ function WebSocketTest()
                   var received_msg = evt.data;
                   console.log("Nachricht über WebSocket erhalten");
 				  document.getElementById("websocketMessageContainer").innerHTML = evt.data;
+				  document.getElementById("bannerContainer").src = "http://localhost/php/generated/img.jpg"
                };
 				
             }
             
             else
             {
-               console.log("WebSocket wird vom Browser nich unterstützt!");
+               console.log("WebSocket wird vom Browser nicht unterstützt!");
             }
          }
 		 
 		 
 	//Führe Funktion aus 
-	WebSocketTest()
+	WebSocketTest();
