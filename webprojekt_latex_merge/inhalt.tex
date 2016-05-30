@@ -2,7 +2,7 @@
 \label{Einleitung}
 Im Rahmen der Vorlesung \textit{Webprogrammierung} galt es als Projekt, eine Website zu erstellen, welche ein Schulsportfest in freier Art und Weise unterstützt. Dabei mussten verschiedene Technologien aus dem Bereich der Webprogrammierung eingesetzt werden, um für diese eine Grundverständnis zu entwickeln.
 \par
-Die in dieser Ausarbeitung behandelte Internetseite unterstützt Teilnehmer und Teilhaber vor, während und nach dem Fest: So kann sich z.B. ein Auswärtiger vor oder am Tage des Sportfestes eine Anfahrtsbeschreibung anschauen, Wettkämpfer können danach eigene Bestwerte betrachten. Oder auch entstandene Fotos sind in einer Galerie für jedermann zugänglich.
+Die in dieser Ausarbeitung behandelte Internetseite unterstützt Teilnehmer und Teilhaber vor, während und nach dem Fest: So kann sich z.B. ein Auswärtiger vor oder am Tage des Sportfestes eine Anfahrtsbeschreibung anschauen, Wettkämpfer können danach eigene Bestwerte betrachten. Und entstandene Fotos sind in einer Galerie für jedermann zugänglich.
 \par
 Diese Arbeit beschreibt die benutzten und geforderten Technologien, indem zuerst jene der Benutzeroberfläche erläutert werden. Danach werden die Technologien für die Client-Server-Architektur durchleuchtet.
 
@@ -37,7 +37,7 @@ Darüber hinaus wurden für dieses Projekt auch eigene CSS-Klassen geschrieben, 
 
 \subsection{Kompatibilität mit mobilen Endgeräten}
 \label{Kompatibilität mit mobilen Endgeräten}
-Ein weiterer Vorteil des Twitter Bootstrap Frameworks ist, dass die Website \textit{"'responisve"'} ist, was bedeutet, dass sich die Seite der Fenstergröße anpasst. Dadurch ist sie auch für mobile Endgeräte kompatibel: Bei Verkleinerung des Fensters ordnen sich die Seitenelemente automatisch neu an und die Navigationsbar oben wird durch einen Menü-Button komprimiert (siehe Abbildung \vref{fig:responsive}).
+Ein weiterer Vorteil des Twitter Bootstrap Frameworks ist, dass die Website \textit{"'responsive"'} ist, was bedeutet, dass sich die Seite der Fenstergröße anpasst. Dadurch ist sie auch für mobile Endgeräte kompatibel: Bei Verkleinerung des Fensters ordnen sich die Seitenelemente automatisch neu an und die Navigationsbar oben wird durch einen Menü-Button komprimiert (siehe Abbildung \vref{fig:responsive}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -50,7 +50,7 @@ Ein weiterer Vorteil des Twitter Bootstrap Frameworks ist, dass die Website \tex
 \label{Clientseitiges JavaScript}
 Um Frontend-seitige Anpassungen der Website vorzunehmen, ohne die komplette Seite neu laden zu müssen, wird JavaScript verwendet. In diesem Projekt wird es unter anderem angewandt, um zu überprüfen, ob ein Nutzer angemeldet ist, und um daraus resultierend Wettkampfergebnisse des angemeldeten Benutzers anzuzeigen.
 \par
-Durch klicken auf den Knopf für die Ergebnisse wird dabei nicht nur ein Dialog geöffnet, sondern auch eine Funktion aufgerufen (siehe Abbildung \vref{fig:javaScript}). Die globalen Variablen, welche in dieser Funktion benutzt werden, sind beim Aufruf der Seite \textit{null}, und werden erst nach erfolgreicher Anmeldung des Nutzers mit einem Wert belegt (siehe auch Kapitel \vref{Konsumieren der Daten im Frontend per AJAX-Call}).
+Durch Klicken auf den Knopf für die Ergebnisse wird dabei nicht nur ein Dialog geöffnet, sondern auch eine Funktion aufgerufen (siehe Abbildung \vref{fig:javaScript}). Die globalen Variablen, welche in dieser Funktion benutzt werden, sind beim Aufruf der Seite \textit{null}, und werden erst nach erfolgreicher Anmeldung des Nutzers mit einem Wert belegt (siehe auch Kapitel \vref{Konsumieren der Daten im Frontend per AJAX-Call}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -145,9 +145,9 @@ Das Endergebnis l\"asst sich in nachfolgender Abbildung bewundern:
 
 \section{Einbindung von Social Buttons mittels des Heise Plug-Ins}
 \label{Einbindung von Social Buttons mittels des Heise Plug-Ins}
-Um soziale Netzwerke der Schule oder des Sportfestes auf der Seite verlinken zu können, wurden mittels des Heise Plug-Ins Social Buttons eingebunden (Facebook, Twitter und Google+). Der Vorteil bei diesem Plug-In liegt darin, dass der Nutzer selbst bestimmen kann, ob er diese Buttons benutzen möchte, oder komplett für die Seite deaktivieren will. Der Sinn dahinter liegt in der Datenschutzproblematik bei der Einbindung der "`Like"'-Buttons von Facebook und Co.: Das Einbinden dieser Buttons erfolgt über einen iFrame, welcher von Facebook und Co. selbst zur Verfügung gestellt wird. Der iFrame enthält Code, der veranlasst, dass die URL oder auch Cookies der aufgerufenen Seite an Facebook geschickt werden. Ist der Anwender zudem gleichzeitig in einem anderen Fenster bei Facebook angemeldet, so übermittelt das iFrame zusätzlich Sitzungs-Id, wodurch Facebook einen Webseitenaufruf einer konkreten Person zuordnen kann.
+Um soziale Netzwerke der Schule oder des Sportfestes auf der Seite verlinken zu können, wurden mittels des Heise Plug-Ins Social Buttons eingebunden (Facebook, Twitter und Google+). Der Vorteil bei diesem Plug-In liegt darin, dass der Nutzer selbst bestimmen kann, ob er diese Buttons benutzen möchte oder komplett für die Seite deaktivieren will. Der tiefere Sinn liegt in der Datenschutzproblematik bei der Einbindung der "`Like"'-Buttons von Facebook und Co.: Das Einbinden dieser Buttons erfolgt über einen iFrame, welcher von Facebook und Co. selbst zur Verfügung gestellt wird. Der iFrame enthält Code, der veranlasst, dass die URL oder auch Cookies der aufgerufenen Seite an Facebook geschickt werden. Ist der Anwender zudem gleichzeitig in einem anderen Fenster bei Facebook angemeldet, so übermittelt das iFrame zusätzlich Sitzungs-Id, wodurch Facebook einen Webseitenaufruf einer konkreten Person zuordnen kann.
 \par
-Damit das also nicht passiert, dürfte die Seite entweder keinerlei Elemente von Facebook, Twitter und Google+ beinhalten, oder das Heise Plug-In verhindert eben genau dies, indem all diese Elemente zunächst bei Aufruf der Seite deaktiviert sind. Möchte der Nutzer nun einer der Funktionen der sozialen Netzwerke nutzen, so muss er sie zuvor über das Plug-In aktiviert.
+Damit das also nicht passiert, dürfte die Seite entweder keinerlei Elemente von Facebook, Twitter und Google+ beinhalten oder das Heise Plug-In verhindert eben genau dies, indem all diese Elemente zunächst bei Aufruf der Seite deaktiviert sind. Möchte der Nutzer nun eine der Funktionen der sozialen Netzwerke nutzen, so muss er sie zuvor über das Plug-In aktivieren.
 \par
 In die Website integriert wurde das Plug-In, indem zuerst das von Heise zur Verfügung gestellte Skript des Plug-Ins im \textit{<head>} geladen wird und ein HTML-Element durch ein weiteres Skript gefüllt wird (siehe Abbildung \vref{fig:heisePlugin1}).
 
@@ -194,13 +194,13 @@ Nachdem sichergestellt wurde, dass die Daten f\"ur die Erstellung eines neuen Us
 \newline	
 \includegraphics[width=1\textwidth]{img/vincent/abb14.png}
 \newline
-Im Coding wird auch ein Cookie gesetzt, dazu mehr im Abschnitt, welches sich mit dem Setzen und der Auswertung eines Cookies besch\"aftigt.	
+Im Coding wird auch ein Cookie gesetzt, dazu mehr im Abschnitt, welcher sich mit dem Setzen und der Auswertung eines Cookies besch\"aftigt.	
 
 \section{Anmeldefunktion mit node.js und AJAX-Call}
 \label{Anmeldefunktion mit node.js und AJAX-Call}
-Ist ein Nutzer der Website gleichzeitig auch Teilnehmer des Sportfestes, was zugleich bedeutet, dass für ihn Ergebnisse für Weitsprung, Sprint etc. in der Datenbank hinterlegt sind, kann er sich jene Ergebnisse anzeigen lassen, indem er sich anmeldet. Um diese Information von der Datenbank an das Frontend kommunizieren zu können bedarf es an einem Server, der sich mit der Datenbank verbindet, und an einer Technologie, welche sich die benötigten Informationen von dem Server holt und an das Frontend bringt. 
+Ist ein Nutzer der Website gleichzeitig auch Teilnehmer des Sportfestes, was zugleich bedeutet, dass für ihn Ergebnisse für Weitsprung, Sprint etc. in der Datenbank hinterlegt sind, kann er sich jene Ergebnisse anzeigen lassen, indem er sich anmeldet. Um diese Information von der Datenbank an das Frontend kommunizieren zu können, bedarf es eines Servers, der sich mit der Datenbank verbindet, und einer Technologie, welche sich die benötigten Informationen von dem Server holt und an das Frontend bringt. 
 \par
-Für diese Website wurde Ersteres mit einem REST-Service durch node.js und Zweites mit einem jQuery AJAX-Call realisiert, der den REST-Service konsumiert.
+Für diese Website wurde Ersteres mit einem REST-Service durch node.js und das Zweite mit einem jQuery AJAX-Call realisiert, der den REST-Service konsumiert.
 
 \subsection{Bereitstellung eines REST-Service durch node.js}
 \label{Bereitstellung eines REST-Service durch node.js}
@@ -213,7 +213,7 @@ Die Anbindung der MySQL-Datenbank wurde in node.js mit Hilfe des Plug-Ins \texti
 	\label{fig:nodeServer1}
 \end{figure}
 
-Zusätzlich wurden noch vor der Erstellung der Datenbankanbindung ein besonderer HTTP-Header erstellt, um das Cross-Origin-Problem zu beheben, durch welches manche Browser AJAX-Calls unterbinden, welche auf externe APIs/ Server zugreifen (siehe Abbildung \vref{fig:nodeServer2}).
+Zusätzlich wurde noch vor der Erstellung der Datenbankanbindung ein besonderer HTTP-Header erstellt, um das Cross-Origin-Problem zu beheben, durch welches manche Browser AJAX-Calls unterbinden, welche auf externe APIs/ Server zugreifen (siehe Abbildung \vref{fig:nodeServer2}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -237,7 +237,7 @@ Meldet der Nutzer sich nun über folgendes Log-In-Fenster im unteren Teil der We
 	\label{fig:wettkampfErgebnisse}
 \end{figure}
 
-Dies geschieht durch einen AJAX-Call, welcher bei der Anmeldung ausgeführt werden (siehe Abbildung \vref{fig:ajaxCall}).
+Dies geschieht durch einen AJAX-Call, welcher bei der Anmeldung ausgeführt wird (siehe Abbildung \vref{fig:ajaxCall}).
 
 \begin{figure}[!h]
 	\makebox[\textwidth]{ 
@@ -291,11 +291,11 @@ Dem User wird angezeigt, ob er sich mit hoher Wahrscheinlichkeit schon registrie
 
 \chapter{Fazit}
 \label{Fazit}
-Nach Erstellung eines umfangreicheren und in sich abgeschlossenen Projekts, wie es bei dem Projekt dieser Ausarbeitung der Fall ist, ist es mehr oder weniger garantiert, ein fundiertes Grundverständnis, trotz der hohen Anzahl an Anforderungen, für die verwendeten Technologien zu entwickeln. 
+Trotz der Vielfalt der Anforderungen an die Website ist es durch dieses umfangreichere Projekt mehr oder weniger garantiert, ein Grundverständnis für die verwendeten Technologien zu entwickeln. 
 \par
-Durch die hohe Anzahl und Vielfältigkeit der technologischen Anforderungen wird allerdings auch sehr schnell deutlich: Es gibt Technologien, welche sich relativ unkompliziert umsetzen lassen, und welche, die umfangreicher und wesentlich zeitaufwändiger sind. 
+Durch die hohe Anzahl an unterschiedlichen, technologischen Anforderungen wird allerdings auch sehr schnell deutlich: Es gibt Technologien, welche sich relativ unkompliziert umsetzen lassen, und welche, die umfangreicher und wesentlich zeitaufwändiger sind. 
 \par
-Folglich reicht für die erste Art ein Grundverständnis vollkommen aus. Ein Beispiel hierzu bietet das Heise Plug-In: Durch ein kleines Skript und einem zugehörigen HTML-Element ist das Plug-In schon komplett eingebunden. Die Funktionalitäten des Plug-Ins können mit dem Grundverständnis darüber vollkommen ausgeschöpft werden.
+Folglich reicht für ersteres ein Grundverständnis vollkommen aus. Ein Beispiel hierzu bietet das Heise Plug-In: Durch ein kleines Skript und einem zugehörigen HTML-Element ist das Plug-In schon komplett eingebunden. Die Funktionen des Plug-Ins können mit dem Grundverständnis darüber vollkommen ausgeschöpft werden.
 \par
 Anders hingegen ist das bei komplexeren Anforderungen, wie z.B. node.js oder Google Maps. Mit einem Grundverständnis lassen sich zwar einigermaßen schnell eine Datenbankverbindung, ein Server oder eine Karte erstellen - jedoch sind node.js und die Google Maps API wesentlich mächtiger und umfangreicher. 
 \\
@@ -303,4 +303,4 @@ Mit node.js können bspw. \textit{"'Connection-Pools"'} zur Optimierung von glei
 \\
 Die API von Google Maps bietet umfassendere Kartenfunktionen, wie Streetview oder Satellitenkarten.
 \\
-Bei solchen Anforderungen ist ein tiefgründiges Wissen über die Technologien von Nöten, um sie wirklich zu meistern.
+Bei solchen Anforderungen ist ein fundiertes Wissen über diese Technologien von Nöten, um sie wirklich meistern zu können.
