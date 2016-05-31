@@ -25,10 +25,10 @@ var app = express();
 app.use(function (req, res, next) {
 	//address, which should access the server
 	//Use this line if you start index.html over a server
-	//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:63342');
 
 	//Use this line if you open index.html in your browser without a server
-	res.setHeader('Access-Control-Allow-Origin', 'null');
+	//res.setHeader('Access-Control-Allow-Origin', 'null');
 
 	// Request methods you wish to allow
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
