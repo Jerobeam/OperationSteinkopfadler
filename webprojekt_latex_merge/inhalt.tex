@@ -118,7 +118,7 @@ Um nun die Karte auch tatsächlich in der Website anzeigen zu können, wurde zu 
 \end{figure}
 
 \section{Canvas-Minispiel}
-Mittels Canvas wurde ein kleines Spiel f\"ur den Zeitvertreib implementiert. Dabei wurde zuerst ein Canvas-Element und grundlegende Funktionen definiert um z.B. den Inhalt des Canvas-Elements zu löschen, diese Funktion wird mittels \textit{setInterval} immer wieder aufgerufen, damit das Canvas neu gezeichnet werden kann.     
+Mittels Canvas wurde ein kleines Spiel f\"ur den Zeitvertreib implementiert. Dabei wurden zuerst ein Canvas-Element und grundlegende Funktionen definiert um z.B. den Inhalt des Canvas-Elements zu löschen, diese Funktion wird mittels \textit{setInterval} immer wieder aufgerufen, damit das Canvas neu gezeichnet werden kann.     
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb04.png}
 \newline
@@ -126,19 +126,19 @@ Durch die \textit{Component}-Funktion werden die Objekte, wie z.B. der Hintergru
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb05.png}
 \newline
-Die \textit{Component}-Funktion erh\"alt als Parameter die Koordinatenposition des \"ubergebenen Elements, wenn es sich um ein Bild handelt, wird mittels \textit{new Image()} ein Bild zum Zeichnen auf dem Canvas erstellt. In der \textit{Update}-Funktion wird das Bild letztendlich gezeichnet, da diese Funktion mehrmals die Sekunde aufgerufen wird entsteht die Illusion einer Bewegung des Tauchers und des Hintergrundes. Dabei wird mittels der \textit{newPos}-Funktion daf\"ur Sorge getragen, dass sich die logische Position des Bildes ver\"andert, die Variable \textit{speedY} und \textit{speedX} geben die Geschwindigkeit an mit der die Position ver\"andert wird. 
+Die \textit{Component}-Funktion erh\"alt als Parameter die Koordinatenposition des \"ubergebenen Elements. Wenn es sich um ein Bild handelt, wird mittels \textit{new Image()} dieses zum Zeichnen auf dem Canvas erstellt. In der \textit{Update}-Funktion wird das Bild letztendlich gezeichnet. Da diese Funktion mehrmals die Sekunde aufgerufen wird, entsteht die Illusion einer Bewegung des Tauchers und des Hintergrundes. Dabei wird mittels der \textit{newPos}-Funktion daf\"ur Sorge getragen, dass sich die logische Position des Bildes ver\"andert, die Variable \textit{speedY} und \textit{speedX} geben die Geschwindigkeit an, mit der die Position ver\"andert wird. 
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb06.png}
 \newline
-Den Motor des Programms bildet die \textit{updateGameArea}-Funktion. Sie wird per \textit{setInterval} alle 20 Millisekunden aufgerufen, und aktualisiert die Position des Hintergrunds und die des Tauchers, außerdem sorgt sie daf\"ur das die \textit{Update}-Funktionen ausgef\"uhrt werden:
+Den Motor des Programms bildet die \textit{updateGameArea}-Funktion. Sie wird per \textit{setInterval} alle 20 Millisekunden aufgerufen und aktualisiert die Position des Hintergrunds und die des Tauchers, außerdem sorgt sie daf\"ur, dass die \textit{Update}-Funktionen ausgef\"uhrt werden:
 \newline
 \includegraphics[width=0.6\textwidth]{img/vincent/abb07.png}
 \newline
-Der User kann die Bewegung des Tauchers per Buttons steuern, dabei wird die Geschwindigkeit des Tauchers, je nachdem welcher Button gedr\"uckt wurde entsprechend ver\"andert:
+Der User kann die Bewegung des Tauchers per Button steuern, dabei wird die Geschwindigkeit des Tauchers, je nachdem, welcher Button gedr\"uckt wurde, entsprechend ver\"andert:
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb08.png}
 \newline
-Das Endergebnis l\"asst sich in nachfolgender Abbildung bewundern:
+Das Endergebnis ist in nachfolgender Abbildung visualisiert:
 \newline
 \includegraphics[width=0.7\textwidth]{img/vincent/abb09.png}
 \newline
@@ -176,16 +176,16 @@ Das nachfolgende Listing zeigt das HTML-Formular:
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb11.png}
 \newline
-Wie aus dem Code zu entnehmen ist, werden f\"ur die Registrierung Username, Passwort, Vor- und Zuname und die Email-Adresse des Users \"ubertragen. Durch die Definition des Passwort Eingeabefeld mit \textit{type="password"} wird ein maskieren der eingegebenen Zeichen mit Punkten erreicht wie folgende Abbildung zeigt:
+Wie aus dem Code zu entnehmen ist, werden f\"ur die Registrierung Username, Passwort, Vor- und Zuname und die Email-Adresse des Users \"ubertragen. Durch die Definition des Passworts Eingabefeld mit \textit{type="password"} wird ein Maskieren der eingegebenen Zeichen mit Punkten erreicht, wie folgende Abbildung zeigt:
 \newline
 \includegraphics[width=0.5\textwidth]{img/vincent/abb01.png}
 \newline
-Nachdem der User seine Daten zur Registrierung eingegeben hat, werden diese an den Server gesendet. Der Server baut eine Verbindung zur \textit{MySQL}-Datenbank auf, dabei greift er auf eine zuvor erstellte Konfigurationsdatei zu und liest die ben\"otigten Informationen wie z.B. denn Datenbankuser und dessen Passwort aus. Anschlie{\ss}end wird die Verbindung zu Datenbank \"uberpr\"uft. Das nachfolgende Listing zeigt die beschriebene Funktion:
+Nachdem der User seine Daten zur Registrierung eingegeben hat, werden diese an den Server gesendet. Der Server baut eine Verbindung zur \textit{MySQL}-Datenbank auf, dabei greift er auf eine zuvor erstellte Konfigurationsdatei zurück und liest die ben\"otigten Informationen, wie z.B. den Datenbankuser und dessen Passwort. Anschlie{\ss}end wird die Verbindung zur Datenbank \"uberpr\"uft. Das nachfolgende Listing zeigt die beschriebene Funktion:
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb12.png}
 \newline
 
-Nachdem die Verbindung zur Datenbank \"uberpr\"uft wurde, wird eine Datenbankabfrage vorbereitet, dabei werden die Daten des HTML-Formulars in Variablen gespeichert. Nun wird mittels einer Else-If-Verzweigung \"uberpr\"uft, ob ein User mit dem selben Usernamen oder derselben Email-Adresse bereits existiert, damit sich kein User mit denn selben Informationen ein weiteres Mal registrieren kann und die Datenkonsistenz gew\"ahrleiset ist. Durch das \textit{echo}-Kommando wird eine entsprechende Information ausgegeben, sollte es bereits existente Eintr\"age geben. Folgendes Listing zeigt den beschriebenen Code:
+Nachdem die Verbindung zur Datenbank \"uberpr\"uft wurde, wird eine Datenbankabfrage vorbereitet, dabei werden die Daten des HTML-Formulars in Variablen gespeichert. Nun wird mittels einer Else-If-Verzweigung \"uberpr\"uft, ob ein User mit demselben Usernamen oder derselben Email-Adresse bereits existiert, damit sich kein User mit demselben Informationen ein weiteres Mal registrieren kann und die Datenkonsistenz gew\"ahrleistet ist. Durch das \textit{echo}-Kommando wird eine entsprechende Information ausgegeben, sollte es bereits existente Eintr\"age geben. Folgendes Listing zeigt den beschriebenen Code:
 \newline	
 \includegraphics[width=1\textwidth]{img/vincent/abb13.png}
 \newline
@@ -251,7 +251,7 @@ Durch den AJAX-Call werden globale JavaScript Variablen gesetzt, welche dann bei
 \pagebreak
 \section{Websockets zur Systemzeitabfrage}
 Eines der Ziele des Projekts war die Implementierung von Websockets, diese wurde mittels \textit{node.js} und der Bibliothek \textit{node.js-websocket}
-auf der Serverseite und mittels JavaScript auf der Clientseite umgesetzt. Der Server horcht auf eingehende Verbindungen auf dem Port 8001. Sobald sich ein Client verbunden hat wird eine Event gefeuert und der Server sendet seine Systemzeit \"uber die Websocket-Verbindung an den Client, wie aus folgendem Coding zu entnehmen ist:  
+auf der Serverseite und mittels JavaScript auf der Clientseite umgesetzt. Der Server horcht auf eingehende Verbindungen auf dem Port 8001. Sobald sich ein Client verbunden hat, wird ein Event gefeuert und der Server sendet seine Systemzeit \"uber die Websocket-Verbindung an den Client, wie aus folgendem Coding zu entnehmen ist:  
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb02.png}
 \newline
@@ -265,7 +265,7 @@ Das Ergebnis sieht wie folgt aus:
 \newline
 
 \section{Serverseitige Bildgenerierung}
-Um die serverseitige Bildgenerierung mittels php durchzuf\"uhren, wurde eine neue php-Datei erstellt. Diese soll bei Aufruf ein Banner erzeugen, welches dann in die Hauptseite eingebunden wird. Dabei wird der Text 'Viel Erfolg bei den Wettk\"ampfen!' verwendet, welcher in zuf\"alliger Farbe angezeigt wird, es wird außerdem ein eigener Font genutzt. durch die rand Funktion wird ein zuf\"alliger Farbwert generiert und anschließend verwendet um die Textfarbe festzulegen. Am Anfang wird nnoch \"uberpr\"uft, ob bereits ein entsprechendes Bild generiert wurde, wenn dass der Fall ist, wird dieses \"uberschrieben, dadurch wird dem User bei jedem Aufruf der Seite ein Banner in anderer Farbe angezeigt. Folgendes wurde programmiert:
+Um die serverseitige Bildgenerierung mittels php durchzuf\"uhren, wurde eine neue php-Datei erstellt. Diese soll bei Aufruf ein Banner erzeugen, welches dann in die Hauptseite eingebunden wird. Dabei wird der Text 'Viel Erfolg bei den Wettk\"ampfen!' verwendet, welcher in zuf\"alliger Farbe angezeigt wird, es wird außerdem ein eigener Font genutzt. Durch die rand Funktion wird ein zuf\"alliger Farbwert generiert und anschließend verwendet, um die Textfarbe festzulegen. Am Anfang wird noch \"uberpr\"uft, ob bereits ein entsprechendes Bild generiert wurde. Wenn dass der Fall ist, wird dieses \"uberschrieben. Dadurch wird dem User bei jedem Aufruf der Seite ein Banner in anderer Farbe angezeigt. Folgendes wurde programmiert:
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb10.png}
 \newline
@@ -276,7 +276,7 @@ Hier zwei Beispiele f\"ur das Ergebnis der Generierung:
 \newline
 
 \section{Cookie für den Registrierungszeitpunkt}
-Ein weiteres Ziel des Projektes war die sinnvolle Verwendung eines Cookies, mittels php wurde ein Cookie bei der erfolgreichen Registrierung gesetzt:
+Ein weiteres Ziel des Projektes war die sinnvolle Verwendung eines Cookies. Mittels php wurde ein Cookie bei der erfolgreichen Registrierung gesetzt:
 \newline
 \includegraphics[width=1\textwidth]{img/vincent/abb18.png}
 \newline
